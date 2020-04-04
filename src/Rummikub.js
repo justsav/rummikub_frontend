@@ -1,4 +1,5 @@
 import { PlayerView } from 'boardgame.io/core'
+import { Game } from 'boardgame.io/internal'
 
 const tiles = [
   'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13',
@@ -21,14 +22,13 @@ const initializeGame = (ctx) => {
       pool: ctx.random.Shuffle(tiles)
     },
     players: {},// Available to Player's own object, like players['1']
-    playerView: PlayerView.STRIP_SECRETS // Removes secret data before sending to Player
   }
   //Initial draw of cards
   ctx.playOrder.forEach((player) => {
     G.players[player] = G.secret.pool.splice(-14)
   })
 
-  return G
+  return Game(G)
 }
 
 // Dummy move - for testing
@@ -46,6 +46,8 @@ const Rummikub = {
   setup: (ctx) => initializeGame(ctx),
 
   moves: {ClickCell, UpdateBoard},
+
+  playerView: PlayerView.STRIP_SECRETS, // Removes secret data before sending to Player
 }
 
 export default Rummikub
