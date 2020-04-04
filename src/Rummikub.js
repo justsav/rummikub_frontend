@@ -24,7 +24,7 @@ const initializeGame = (ctx) => {
     playerView: PlayerView.STRIP_SECRETS // Removes secret data before sending to Player
   }
   //Initial draw of cards
-  ctx.playOrder.map((player) => {
+  ctx.playOrder.forEach((player) => {
     G.players[player] = G.secret.pool.splice(-14)
   })
 
