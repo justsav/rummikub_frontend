@@ -1,5 +1,4 @@
 import { PlayerView } from 'boardgame.io/core'
-import { Game } from 'boardgame.io/internal'
 
 const tiles = [
   'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13',
@@ -28,7 +27,7 @@ const initializeGame = (ctx) => {
     G.players[player] = G.secret.pool.splice(-14)
   })
 
-  return Game(G)
+  return G
 }
 
 // Dummy move - for testing
