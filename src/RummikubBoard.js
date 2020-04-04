@@ -1,6 +1,9 @@
 import React from 'react'
+import MainBoard from './components/MainBoard'
+import Rack from './components/Rack'
 
-const RummikubBoard = ({G, ctx, moves, events}) => {
+
+const RummikubBoard = ({G, ctx, moves, events, playerID}) => {
   
   const isActive = (id) => {
     if (!isActive) return false;
@@ -15,33 +18,11 @@ const RummikubBoard = ({G, ctx, moves, events}) => {
     }
   }
 
-  const cellStyle = {
-    border: '1px solid #555',
-    width: '50px',
-    height: '50px',
-    lineHeight: '50px',
-    textAlign: 'center',
-  };
-
-  let tbody = [];
-  for (let i = 0; i < 12; i++) {
-    let cells = [];
-    for (let j = 0; j < 15; j++) {
-      const id = 15 * i + j;
-      cells.push(
-        <td style={cellStyle} key={id} onClick={() => onClick(id)}>
-          {G.cells[id]}
-        </td>
-      );
-    }
-    tbody.push(<tr key={i}>{cells}</tr>);
-  }
-
   return (
     <div>
-      <table id="board">
-        <tbody>{tbody}</tbody>
-      </table>
+      <MainBoard {...{G, onClick}}/>
+      <h5>Rack</h5>
+      <Rack playerRack={G.players[playerID]}/>
     </div>
   )
 }
