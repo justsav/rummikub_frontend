@@ -21,7 +21,6 @@ const initializeGame = (ctx) => {
       pool: ctx.random.Shuffle(tiles)
     },
     players: {},// Available to Player's own object, like players['1']
-    playerView: PlayerView.STRIP_SECRETS // Removes secret data before sending to Player
   }
   //Initial draw of cards
   ctx.playOrder.forEach((player) => {
@@ -46,6 +45,8 @@ const Rummikub = {
   setup: (ctx) => initializeGame(ctx),
 
   moves: {ClickCell, UpdateBoard},
+
+  playerView: PlayerView.STRIP_SECRETS, // Removes secret data before sending to Player
 }
 
 export default Rummikub
