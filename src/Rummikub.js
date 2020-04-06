@@ -32,29 +32,50 @@ const initializeGame = (ctx) => {
   return G
 }
 
-// Dummy move - for testing
-const ClickCell = (G, ctx, id) => {
-  G.cells[id] = ctx.currentPlayer
-}
+const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}) => {
+  let origin, destination, originIndex, destinationIndex
+  console.log(fromX, fromY, fromLocation)
+  console.log(toX, toY, toLocation)
 
-// 
-const UpdateBoard = (G, ctx, board) => {
-  G.cells = board
-}
+  if (fromLocation === 'board') {
+    origin = G.cells
+    originIndex = fromY * 16 + fromX
+  } else if (fromLocation === 'rack') {
+    origin = G.players[ctx.currentPlayer]
+    originIndex = fromY * 6 + fromX
+  } else {
+    console.log(fromX, fromY, fromLocation)
+    throw new Error('invalid origin location!')
+  }
 
-const MoveToBoard = (G, ctx, rackX, rackY, boardX, boardY) => {
-  const tile = '' + G.players[ctx.currentPlayer][rackY * 8 + rackX]
-  G.players[ctx.currentPlayer][rackY * 8 + rackX] = null
-  G.cells[boardY * 16 + boardX] = tile
+  if (toLocation === 'board') {
+    destination = G.cells
+    destinationIndex = toY * 16 + toX
+  } else if (toLocation === 'rack') {
+    destination = G.players[ctx.currentPlayer]
+    destinationIndex = toY * 8 + toX
+  } else {
+    console.log(toX, toY, toLocation)
+    throw new Error('invalid destination location!')
+  }
+
+  // Copy
+  const oTile = origin[originIndex]
+  const dTile = destination[destinationIndex]
+
+  // TODO: Handle swapping Tile ON Tile
+  // Swap
+  destination[destinationIndex] = oTile
+  origin[originIndex] = dTile
 }
 
 
 const Rummikub = {
   setup: (ctx) => initializeGame(ctx),
 
-  moves: {ClickCell, UpdateBoard, MoveToBoard},
+  moves: {MoveTile},
 
-  playerView: PlayerView.STRIP_SECRETS, // Removes secret data before sending to Player
+  playerView: PlayerView.STRIP_SECRETS, // TODO: Remove when deploying to production
 }
 
 export default Rummikub

@@ -1,29 +1,19 @@
 import React from 'react'
 import MainBoard from './components/MainBoard'
 import Rack from './components/Rack'
+import { DndProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
 
 
 const RummikubBoard = ({G, ctx, moves, events, playerID}) => {
-  
-  const isActive = (id) => {
-    if (!isActive) return false;
-    if (G.cells[id] !== null) return false;
-    return true;
-  }
-
-  const onClick = (id) => {
-    if (isActive(id)) {
-      moves.ClickCell(id);
-      events.endTurn();
-    }
-  }
-
   return (
-    <div>
-      <MainBoard {...{G, onClick}}/>
-      <h5>Rack</h5>
-      <Rack playerRack={G.players[playerID]}/>
-    </div>
+    <DndProvider backend={Backend}>
+      <div>
+        <MainBoard {...{G, MoveTile: moves.MoveTile}}/>
+        <h5>Rack</h5>
+        <Rack {...{playerRack: G.players[playerID], MoveTile: moves.MoveTile}}/>
+      </div>
+    </DndProvider>
   )
 }
 
