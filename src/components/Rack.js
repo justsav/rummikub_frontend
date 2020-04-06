@@ -1,26 +1,34 @@
 import React from 'react'
+import Square from './Square'
+import Tile from './Tile'
 
-const Rack = ({playerRack}) => {
+const Rack = ({board, playerRack}) => {
   const cellStyle = {
-    border: '1px solid #555',
     width: '50px',
     height: '50px',
     lineHeight: '50px',
     textAlign: 'center',
   }
 
+  const renderTile = (x, y) => {
+    const tile = playerRack[y * 8 + x]
+    return tile ? <Tile {...{tile, x, y}}/> : null
+  }
+
   let tbody = []
-  for (let i = 0; i < 4; i++) {
+  for (let y = 0; y < 4; y++) {
     let cells = []
-    for (let j = 0; j < 8; j++) {
-      const id = 8 * i + j
+    for (let x = 0; x < 8; x++) {
+      const id = 8 * y + x
       cells.push(
         <td style={cellStyle} key={id} >
-          {playerRack[id]}
+          <Square {...{x, y}}>
+            {renderTile(x, y)}
+          </Square>
         </td>
       )
     }
-    tbody.push(<tr key={i}>{cells}</tr>);
+    tbody.push(<tr key={y}>{cells}</tr>);
   }
 
   return (

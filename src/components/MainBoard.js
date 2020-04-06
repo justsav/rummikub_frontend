@@ -1,27 +1,37 @@
 import React from 'react'
+import Square from './Square'
+import Tile from './Tile'
 
-const MainBoard = ({G, onClick}) => {
+const MainBoard = ({G, moveToBoard}) => {
   const cellStyle = {
-    border: '1px solid #555',
     width: '50px',
     height: '50px',
     lineHeight: '50px',
     textAlign: 'center',
   }
 
+  const renderTile = (x, y) => {
+    const tile = G.cells[y * 16 + x]
+    return tile ? <Tile {...{tile, x, y}}/> : null
+  }
+
   let tbody = []
-  for (let i = 0; i < 10; i++) {
+  for (let y = 0; y < 10; y++) {
     let cells = []
-    for (let j = 0; j < 16; j++) {
-      const id = 16 * i + j
+    for (let x = 0; x < 16; x++) {
+      const id = 16 * y + x
       cells.push(
-        <td style={cellStyle} key={id} onClick={() => onClick(id)}>
-          {G.cells[id]}
+        <td style={cellStyle} key={id}>
+          <Square {...{x, y, moveToBoard}}>
+            {renderTile(x, y)}
+          </Square>
         </td>
       )
     }
-    tbody.push(<tr key={i}>{cells}</tr>);
+    tbody.push(<tr key={y}>{cells}</tr>);
   }
+
+  
 
   return (
     <table id="board">
