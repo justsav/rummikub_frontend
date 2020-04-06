@@ -10,10 +10,10 @@ const MainBoard = ({G, onClick}) => {
   }
 
   let tbody = []
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 10; i++) {
     let cells = []
-    for (let j = 0; j < 15; j++) {
-      const id = 15 * i + j
+    for (let j = 0; j < 16; j++) {
+      const id = 16 * i + j
       cells.push(
         <td style={cellStyle} key={id} onClick={() => onClick(id)}>
           {G.cells[id]}

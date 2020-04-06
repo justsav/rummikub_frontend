@@ -16,7 +16,7 @@ const tiles = [
 
 const initializeGame = (ctx) => {
   const G = {
-    cells: Array(180).fill(null), // Width-15, Height-12
+    cells: Array(160).fill(null), // Width-15, Height-12
     secret: { // Unavailable to Players
       pool: ctx.random.Shuffle(tiles)
     },
@@ -24,7 +24,9 @@ const initializeGame = (ctx) => {
   }
   //Initial draw of cards
   ctx.playOrder.forEach((player) => {
-    G.players[player] = G.secret.pool.splice(-14)
+    const arr = G.secret.pool.splice(-14)
+    G.players[player] = Array(32).fill(null)
+    G.players[player].splice(0, 14, ...arr)
   })
 
   return G
@@ -40,11 +42,17 @@ const UpdateBoard = (G, ctx, board) => {
   G.cells = board
 }
 
+const MoveToBoard = (G, ctx, rackX, rackY, boardX, boardY) => {
+  const tile = '' + G.players[ctx.currentPlayer][rackY * 8 + rackX]
+  G.players[ctx.currentPlayer][rackY * 8 + rackX] = null
+  G.cells[boardY * 16 + boardX] = tile
+}
+
 
 const Rummikub = {
   setup: (ctx) => initializeGame(ctx),
 
-  moves: {ClickCell, UpdateBoard},
+  moves: {ClickCell, UpdateBoard, MoveToBoard},
 
   playerView: PlayerView.STRIP_SECRETS, // Removes secret data before sending to Player
 }
