@@ -2,9 +2,9 @@ import React from 'react'
 import { ItemTypes } from '../constants'
 import { useDrag } from 'react-dnd'
 
-export default function Tile({tile, x, y}) {
+export default function Tile({tile, x, y, location}) {
   const [{isDragging}, drag] = useDrag({
-    item: { type: ItemTypes.TILE, x, y },
+    item: { type: ItemTypes.TILE, x, y, location},
     collect: monitor => ({
       isDragging: !!monitor.isDragging()
     }),

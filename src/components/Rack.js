@@ -2,7 +2,7 @@ import React from 'react'
 import Square from './Square'
 import Tile from './Tile'
 
-const Rack = ({board, playerRack}) => {
+const Rack = ({playerRack, MoveTile}) => {
   const cellStyle = {
     width: '50px',
     height: '50px',
@@ -12,7 +12,7 @@ const Rack = ({board, playerRack}) => {
 
   const renderTile = (x, y) => {
     const tile = playerRack[y * 8 + x]
-    return tile ? <Tile {...{tile, x, y}}/> : null
+    return tile ? <Tile {...{ tile, x, y, location: 'rack' }}/> : null
   }
 
   let tbody = []
@@ -22,7 +22,7 @@ const Rack = ({board, playerRack}) => {
       const id = 8 * y + x
       cells.push(
         <td style={cellStyle} key={id} >
-          <Square {...{x, y}}>
+          <Square {...{ x, y, location: 'rack', MoveTile }}>
             {renderTile(x, y)}
           </Square>
         </td>
