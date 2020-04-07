@@ -17,7 +17,7 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
         {isActive &&
           <React.Fragment>
             <PullTileButton {...{G, playerID, events}}/>
-            <EndTurnButton {...{events}}/>
+            <EndTurnButton FinishTurn={moves.FinishTurn}/>
           </React.Fragment>
         }
         

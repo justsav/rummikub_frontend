@@ -1,4 +1,4 @@
-import { PlayerView } from 'boardgame.io/core'
+import { PlayerView, INVALID_MOVE } from 'boardgame.io/core'
 import {BOARD_WIDTH, BOARD_HEIGHT, RACK_WIDTH, RACK_HEIGHT} from './constants'
 
 const tiles = [
@@ -58,13 +58,24 @@ const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}) =>
   origin[originIndex] = dTile
 }
 
+const checkLegal = (board) => {
+  return true
+}
+
+const FinishTurn = (G, ctx) => {
+  if (!checkLegal(G.cells)) {
+    return INVALID_MOVE
+  }
+  ctx.events.endTurn()
+}
 
 const Rummikub = {
   setup: (ctx) => initializeGame(ctx),
 
-  moves: {MoveTile},
+  moves: {MoveTile, FinishTurn}, 
 
   playerView: PlayerView.STRIP_SECRETS, // TODO: Remove when deploying to production
+
 }
 
 export default Rummikub
