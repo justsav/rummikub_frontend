@@ -6,15 +6,21 @@ import Backend from 'react-dnd-html5-backend'
 import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
 
-const RummikubBoard = ({G, ctx, moves, events, playerID}) => {
+const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
   return (
     <DndProvider backend={Backend}>
       <div>
+        <h1>Player {playerID} {isActive && ' - YOUR TURN'}</h1>
         <MainBoard {...{G, MoveTile: moves.MoveTile}}/>
         <h5>Rack</h5>
         <Rack {...{playerRack: G.players[playerID], MoveTile: moves.MoveTile}}/>
-        <PullTileButton {...{G, playerID, events}}/>
-        <EndTurnButton {...{events}}/>
+        {isActive &&
+          <React.Fragment>
+            <PullTileButton {...{G, playerID, events}}/>
+            <EndTurnButton {...{events}}/>
+          </React.Fragment>
+        }
+        
       </div>
     </DndProvider>
   )
