@@ -58,6 +58,20 @@ const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}) =>
   origin[originIndex] = dTile
 }
 
+const PullTile = {
+  move: (G, ctx, playerID) => {
+    const playerRack = G.players[playerID]
+    const index = playerRack.findIndex(element => element === null)
+
+    if (index) {
+      playerRack[index] = G.secret.pool.pop()
+    } else {
+      throw new Error('Player rack is full')
+    }
+  },
+  client: false
+}
+
 const checkLegal = (board) => {
   return true
 }
@@ -72,7 +86,7 @@ const FinishTurn = (G, ctx) => {
 const Rummikub = {
   setup: (ctx) => initializeGame(ctx),
 
-  moves: {MoveTile, FinishTurn}, 
+  moves: {MoveTile, FinishTurn, PullTile}, 
 
   playerView: PlayerView.STRIP_SECRETS, // TODO: Remove when deploying to production
 
