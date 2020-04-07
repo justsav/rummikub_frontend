@@ -1,4 +1,5 @@
 import { PlayerView } from 'boardgame.io/core'
+import {BOARD_WIDTH, BOARD_HEIGHT, RACK_WIDTH, RACK_HEIGHT} from './constants'
 
 const tiles = [
   'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13',
@@ -16,7 +17,7 @@ const tiles = [
 
 const initializeGame = (ctx) => {
   const G = {
-    cells: Array(160).fill(null), // Width-15, Height-12
+    cells: Array( BOARD_HEIGHT * BOARD_WIDTH ).fill(null),
     secret: { // Unavailable to Players
       pool: ctx.random.Shuffle(tiles)
     },
@@ -25,45 +26,33 @@ const initializeGame = (ctx) => {
   //Initial draw of cards
   ctx.playOrder.forEach((player) => {
     const arr = G.secret.pool.splice(-14)
-    G.players[player] = Array(32).fill(null)
-    G.players[player].splice(0, 14, ...arr)
+    G.players[player] = Array( RACK_HEIGHT * RACK_WIDTH ).fill(null)
+    G.players[player].splice(0, arr.length, ...arr)
   })
 
   return G
 }
 
 const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}) => {
-  let origin, destination, originIndex, destinationIndex
-  console.log(fromX, fromY, fromLocation)
-  console.log(toX, toY, toLocation)
-
-  if (fromLocation === 'board') {
-    origin = G.cells
-    originIndex = fromY * 16 + fromX
-  } else if (fromLocation === 'rack') {
-    origin = G.players[ctx.currentPlayer]
-    originIndex = fromY * 6 + fromX
-  } else {
-    console.log(fromX, fromY, fromLocation)
-    throw new Error('invalid origin location!')
+  const convertXYtoIndex = (location, x, y) => {
+    switch (location) {
+      case 'board':
+        return [ G.cells, y * BOARD_WIDTH + x ]
+      case 'rack':
+        return [ G.players[ctx.currentPlayer], y * RACK_WIDTH + x ]
+      default:
+        console.err('Failed to convert', x, y, location)
+        throw new Error('invalid location!')
+    }
   }
 
-  if (toLocation === 'board') {
-    destination = G.cells
-    destinationIndex = toY * 16 + toX
-  } else if (toLocation === 'rack') {
-    destination = G.players[ctx.currentPlayer]
-    destinationIndex = toY * 8 + toX
-  } else {
-    console.log(toX, toY, toLocation)
-    throw new Error('invalid destination location!')
-  }
+  const [origin, originIndex] = convertXYtoIndex(fromLocation, fromX, fromY)
+  const [destination, destinationIndex] = convertXYtoIndex(toLocation, toX, toY)
 
   // Copy
   const oTile = origin[originIndex]
   const dTile = destination[destinationIndex]
 
-  // TODO: Handle swapping Tile ON Tile
   // Swap
   destination[destinationIndex] = oTile
   origin[originIndex] = dTile
