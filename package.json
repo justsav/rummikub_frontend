@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node -r esm gameServer.js"
+    "server": "rm -rf gameDb && node -r esm gameServer.js"
   },
   "proxy": "http://localhost:8001",
   "eslintConfig": {

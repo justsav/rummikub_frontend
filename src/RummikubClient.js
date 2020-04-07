@@ -6,7 +6,8 @@ import RummikubBoard from './RummikubBoard'
 const RummikubClient = Client({
   game: Rummikub, 
   board: RummikubBoard,
-  multiplayer: Local(),
+  multiplayer: SocketIO(),
+  // multiplayer: Local(),
   // debug: true
 })
 
