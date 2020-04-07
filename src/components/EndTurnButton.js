@@ -1,11 +1,9 @@
 import React from 'react'
 
-const EndTurnButton = ({events}) => {
+const EndTurnButton = ({FinishTurn}) => {
 
-  const handleClick = (e) => {
-      e.preventDefault()
-      // Need Logic Check HERE!
-      events.endTurn()
+  const handleClick = () => {
+      FinishTurn()
     }
   return (
       <button onClick={handleClick}>
