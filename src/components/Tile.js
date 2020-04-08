@@ -10,19 +10,36 @@ export default function Tile({tile, x, y, location}) {
     }),
   })
 
+  const labelColor = (tile) => {
+    let cCode = tile.charAt(0);
+    let tColor = ''
+    if (cCode === 'B') {
+      tColor = 'blue'
+    } else if (cCode === 'K') {
+      tColor = 'black'
+    } else if (cCode === 'O') {
+      tColor = 'orange'
+    } else {
+      tColor = 'red'
+    }
+    return tColor
+  }
+
   return (
     <div
       ref={drag}
       style={{
         opacity: isDragging ? 0.5 : 1,
-        fontSize: 40,
+        fontSize: 30,
+        textShadow: '1px 1px 1px gray',
         fontWeight: 'bold',
         cursor: 'move',
         backgroundColor: '#fcf3d9',
-        borderRadius: '5px',
+        borderRadius: '8px',
+        color: labelColor(tile),
       }}
     >
-      {tile}
+      {tile.slice(1)}
     </div>
   )
 
