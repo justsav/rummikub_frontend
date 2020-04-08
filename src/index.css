@@ -11,3 +11,72 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#master {
+  background-color: cadetblue;
+  width: 100vw;
+}
+
+#top-row {
+    padding-top: 15px;
+}
+
+#logo-area {
+  text-align: center;
+}
+
+#opponent-info {
+  text-align: center;
+}
+
+#end-turn {
+  margin-top: 30px;
+  text-align: right;
+  padding-right: 40px;
+}
+
+#main-board {
+  display: flex;
+  align-content: center;
+  justify-content: center; 
+}
+
+#bottom-row {
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+#self-info {
+  margin: auto;
+  text-align: center;
+}
+
+#rack-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#rack-title {
+  height: 30px;
+  justify-content: center;
+}
+
+#rack-row {
+  justify-content: center;
+}
+
+#rack {
+  background-color:#734700;
+  border: 5px solid black;
+}
+
+#board {
+  background-color: darkgreen;
+  border: 2px solid black;
+}
+
+#pull-tile {
+  margin-top: 30px;
+  text-align: right;
+  padding-right: 40px;
+}

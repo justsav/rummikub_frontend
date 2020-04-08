@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap';
 
 const PullTileButton = ({playerID, PullTile}) => {
     const handleClick = () => {
@@ -6,9 +7,9 @@ const PullTileButton = ({playerID, PullTile}) => {
     }
 
     return (
-        <button onClick={handleClick}>
-        Pull Tile
-        </button>
+        <Button id='pt-btn' variant="dark" size="lg" onClick={handleClick}>
+        + Pull Tile
+        </Button>
     );
 }
 
