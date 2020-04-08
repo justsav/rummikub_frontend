@@ -20,10 +20,11 @@ export default function Square({x, y, location, MoveTile, children}) {
 
   const cellStyle = {
     position: 'relative',
-    border: '1px solid black',
+    border: '1px solid',
+    borderColor: 'rgba(255, 255, 255, .1)',
     width: '100%',
     height: '100%',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     color: 'black'
   }
 

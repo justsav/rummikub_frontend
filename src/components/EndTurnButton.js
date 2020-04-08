@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap';
 
 const EndTurnButton = ({FinishTurn}) => {
 
@@ -6,9 +7,9 @@ const EndTurnButton = ({FinishTurn}) => {
       FinishTurn()
     }
   return (
-      <button onClick={handleClick}>
-      End turn
-      </button>
+      <Button id='et-btn' variant="primary" size="lg" onClick={handleClick}>
+      End Turn
+      </Button>
   );
 }
 

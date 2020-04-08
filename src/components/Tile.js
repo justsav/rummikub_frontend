@@ -18,6 +18,8 @@ export default function Tile({tile, x, y, location}) {
         fontSize: 40,
         fontWeight: 'bold',
         cursor: 'move',
+        backgroundColor: '#fcf3d9',
+        borderRadius: '5px',
       }}
     >
       {tile}
