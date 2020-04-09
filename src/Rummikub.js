@@ -88,7 +88,12 @@ const Rummikub = {
 
   setup: (ctx) => initializeGame(ctx),
 
-  moves: {MoveTile, FinishTurn, PullTile}, 
+  phases: {
+    play: {
+      moves: {MoveTile, FinishTurn, PullTile},
+      start: true
+    }
+  },
 
   playerView: PlayerView.STRIP_SECRETS, // TODO: Remove when deploying to production
 
