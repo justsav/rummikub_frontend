@@ -10,4 +10,8 @@ const server = Server({
   })
 })
 
-server.run(8001, () => console.log("server running"))
+const lobbyConfig = {
+
+}
+
+server.run({ port: 8001 , lobbyConfig})

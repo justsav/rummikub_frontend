@@ -84,6 +84,8 @@ const FinishTurn = (G, ctx) => {
 }
 
 const Rummikub = {
+  name: 'rummikub',
+
   setup: (ctx) => initializeGame(ctx),
 
   moves: {MoveTile, FinishTurn, PullTile}, 

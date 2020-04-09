@@ -1,18 +1,33 @@
 import React, {useState} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import RummikubClient from './RummikubClient'
+import Lobby from './components/Lobby'
 
 const App = () => {
-  const [player0, setPlayer0] = useState(false)
-  const [player1, setPlayer1] = useState(false)
+    const [playerName, setPlayerName] = useState('Visitor')
+    const [gameID, setGameID] = useState('')
+    const [playerID, setPlayerID] = useState('')
+    const [credentials, setCredentials] = useState('')
+    const [startGame, setStartGame] = useState(false)
 
-  return (
-    <div>
-      <button onClick={() => setPlayer0(true)}>Connect 0</button>
-      <button onClick={() => setPlayer1(true)}>Connect 1</button>
-      {player0 && <RummikubClient playerID="0" gameID="defaultGame"/>}
-      {player1 && <RummikubClient playerID="1" gameID="defaultGame"/>}
-    </div>
-  )
+    return (
+        <div>
+            {!startGame &&
+                <Lobby {...{
+                    playerName,
+                    setPlayerName,
+                    gameID,
+                    setGameID,
+                    playerID,
+                    setPlayerID,
+                    credentials,
+                    setCredentials,
+                    setStartGame
+                }}/>
+            }
+            {startGame && <RummikubClient {...{playerID, gameID, credentials}}/>}
+        </div>
+    )
 }
 
 export default App
