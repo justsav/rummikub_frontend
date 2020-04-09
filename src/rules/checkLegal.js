@@ -93,10 +93,11 @@ export function checkLegal(board) {
           numArray.push(num)
         }
       }
-      if(!allEqual(numArray) || allEqual(alphaArray)){
-        resultArray.push(false)
+      const isDistinct = Array.from(new Set(alphaArray)).length === alphaArray.length
+      if (allEqual(numArray) && isDistinct){
+        resultArray.push(true)
       }
-      else{resultArray.push(true)}
+      else{resultArray.push(false)}
         
     }
     return resultArray
