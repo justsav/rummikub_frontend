@@ -1,0 +1,34 @@
+import {checkLegal} from './checkLegal.js'
+
+const input = [
+  [[null], true], //empty
+  [[null, 'JK'], false], //Simple empty and Joker
+  [[null, 'O1'], false], //empty and tile
+  [['B1', 'B2', 'B3'], true], //Simple run
+  [['B1', 'B2', 'JK'], true], //Simple run with Joker
+  [['B1', 'JK', 'JK'], true],//Simple run with Jokers
+  [['B1', 'K1', 'O1'], true],//'Simple group
+  [['B1', 'K1', 'JK'], true],//Simple group with Joker
+  [['JK', 'K1', 'JK'], true],//Simple group with Joker
+  [['B1', 'B2', 'B3', 'O1', 'O2', 'O3'], false],//adjacent runs
+  [['B1', 'K1', 'JK', 'O13', 'R13', 'K13'], false],//adjacent groups
+  [['B1', 'B2', 'B3', null, 'O1', 'O2', 'O3'], true],//separated runs
+  [['B1', 'K1', 'JK', null, 'O13', 'R13', 'K13'], true],//separated groups
+
+  [['O1', 'O2'], false], //length < 3
+  [['O1'], false], //length < 3
+  [['O1', 'O2', 'O3', null, 'B1', null], false], //length < 3
+  [['O1', 'O2', 'O3', null, 'B12', 'O12'], false], //group < 3
+  [['B12', 'O12', 'K12', 'R12'], true], //full group
+  [['B12', 'O12', 'R12', 'R12'], false], //duplicate colors group
+  [['B12', 'O12', 'K12', 'R12', 'B12'], false], //full and duplicate colors group
+  [['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13'], true], // full run
+  [['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B9', 'B10', 'B11', 'B12', 'B13'], false], //broken run
+  [['B12', 'B13', 'B1', 'B2'], false], //mismatched run
+  [['B12', 'B13', 'B2', null, 'O3', 'B3', null, 'JK', 'K1', 'JK'], false], //all wrong combinations except one
+  [['B1', 'O2', 'R3', 'K4', 'O5', 'R6', 'O7', 'R9', 'K10', 'B11', 'B12', 'B13'], false], //wrong run except last three
+]
+
+test.each(input)('checkLegal(%s) is %s', (board, isLegal) => {
+  expect(checkLegal(board)).toBe(isLegal)
+})
