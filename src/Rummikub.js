@@ -1,5 +1,6 @@
 import { PlayerView, INVALID_MOVE } from 'boardgame.io/core'
 import {BOARD_WIDTH, BOARD_HEIGHT, RACK_WIDTH, RACK_HEIGHT} from './constants'
+import {checkLegal} from './rules/checkLegal'
 
 const tiles = [
   'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13',
@@ -61,6 +62,13 @@ const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}, pl
   origin[originIndex] = dTile
 }
 
+const FinishTurn = (G, ctx) => {
+  if (!checkLegal(G.cells)) {
+    return INVALID_MOVE
+  }
+  ctx.events.endTurn()
+}
+
 const PullTile = {
   move: (G, ctx, playerID) => {
     const playerRack = G.players[playerID]
@@ -73,17 +81,6 @@ const PullTile = {
     }
   },
   client: false
-}
-
-const checkLegal = (board) => {
-  return true
-}
-
-const FinishTurn = (G, ctx) => {
-  if (!checkLegal(G.cells)) {
-    return INVALID_MOVE
-  }
-  ctx.events.endTurn()
 }
 
 const Rummikub = {
