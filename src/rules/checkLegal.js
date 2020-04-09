@@ -30,10 +30,6 @@ function getAllCombinations(board) {
 // The main function to check if the move in the GameBoard is Legal
 export function checkLegal(board) {
   const combinations = getAllCombinations(board)
-  for (let i = 0; i < combinations.length; i++) {
-    if (combinations[i].length < 3)
-      return false
-  }
 
   // Function returns true if combination are in valid Group
   function checkRuns(combinations) {
@@ -41,7 +37,9 @@ export function checkLegal(board) {
     const allEqual = (arr) => arr.every(item => item === arr[0])
     const isConsecutive = (arr) =>{
       for(let i=0; i<arr.length - 1; i++){
-        if(arr[i + 1]-arr[i] !== 1) return false
+        if(arr[i + 1]-arr[i] !== 1) {
+          return false
+        }
       }
       return true
     }
@@ -49,7 +47,10 @@ export function checkLegal(board) {
       let numArray = []
       let alphaArray = []
       for (let j = 0; j < combinations[i].length; j++) {
-        if(combinations[i].length < 3) return false
+        if(combinations[i].length < 3) {
+          resultArray.push(false)
+          continue
+        }
         let tile = combinations[i][j]
         if(numArray.length > 0 && tile === 'JK'){
           numArray.push((parseInt(numArray[numArray.length - 1]) + 1).toString())
@@ -80,7 +81,10 @@ export function checkLegal(board) {
     let resultArray = []
     const allEqual = (arr) => arr.every(item => item === arr[0])
     for (let i = 0; i < combinations.length; i++) {
-      if(combinations[i].length > 4 || combinations[i].length < 3) return false
+      if(combinations[i].length > 4 || combinations[i].length < 3) {
+        resultArray.push(false)
+        continue
+      }
       let numArray = []
       let alphaArray = []
       for (let j = 0; j < combinations[i].length; j++) {
