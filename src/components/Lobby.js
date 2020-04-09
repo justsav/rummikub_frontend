@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Container, Button, Form, ListGroup} from "react-bootstrap"
+import {useHistory} from 'react-router-dom'
 
 export default function Lobby({
                                   playerName,
@@ -10,8 +11,8 @@ export default function Lobby({
                                   setPlayerID,
                                   credentials,
                                   setCredentials,
-                                  setStartGame
                               }) {
+    const history = useHistory()
     const [games, setGames] = useState([])
     const [numPlayers, setNumPlayers] = useState('2')
 
@@ -145,7 +146,7 @@ export default function Lobby({
             <Button
                 disabled={!gameID || !playerID || !credentials}
                 variant={'primary'}
-                onClick={setStartGame}
+                onClick={() => history.push('/game')}
             >
                 Start Game
             </Button>

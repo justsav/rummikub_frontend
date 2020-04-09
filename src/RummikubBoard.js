@@ -9,6 +9,7 @@ import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
 import Lobby from './components/Lobby'
 import avatar from './static/avatar.svg'
+import { Redirect } from 'react-router-dom'
 
 const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
@@ -17,19 +18,22 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}
   }
 
   const opponents = []
-  for (const [index, value] of gameMetadata.entries()) {
-    console.log(playerID)
-    console.log(value.id)
-    if (playerID !== value.id.toString() && value.name) {
-      opponents.push(
-        <span className="avatar">
-          <img src={avatar} alt="player avatar" />
-          <p>Player {value.id + 1}:</p>
-          <p>{value.name}</p>
-        </span>
-      )
+  try {
+    for (const [, value] of gameMetadata.entries()) {
+      if (playerID !== value.id.toString() && value.name) {
+        opponents.push(
+          <span className="avatar">
+            <img src={avatar} alt="player avatar" />
+            <p>Player {value.id + 1}:</p>
+            <p>{value.name}</p>
+          </span>
+        )
+      }
     }
+  } catch (err) {
+    return <Redirect to="/lobby"/>
   }
+  
 
   return (
     <DndProvider backend={Backend}>
