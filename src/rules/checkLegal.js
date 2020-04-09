@@ -56,7 +56,7 @@ export function checkLegal(board) {
           numArray.push((parseInt(numArray[numArray.length - 1]) + 1).toString())
         }
         else if(numArray.length === 0 && tile === 'JK'){
-          if(combinations[i][j + 1] == "JK"){
+          if(combinations[i][j + 1] === "JK"){
           numArray.push((parseInt((combinations[i][j + 2]).replace(/[^0-9]/g, "")) - 2).toString())
           }
           else{numArray.push((parseInt((combinations[i][j + 1]).replace(/[^0-9]/g, "")) - 1).toString())}

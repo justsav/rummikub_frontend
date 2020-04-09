@@ -33,7 +33,10 @@ export default function Lobby({
                 numPlayers: numPlayers
             })
         })
-            .then(res => res.status)
+            .then(res => {
+                console.log(res.status)
+                loadGames()
+            })
     }
 
     const joinGame = (gameId, playerId) => {
@@ -52,6 +55,7 @@ export default function Lobby({
                 setGameID(gameId)
                 setPlayerID(playerId)
                 setCredentials(data.playerCredentials)
+                loadGames()
             })
             .catch(err => console.error(err))
     }
@@ -92,7 +96,7 @@ export default function Lobby({
         const pID = freeSlot && `${freeSlot.id}`
         return <ListGroup.Item key={ind}>
             {g.players.map(p => p.name ? `[${p.name}] ` : '[free]')}
-            {!gameID || freeSlot === undefined
+            {!playerID && (!gameID || freeSlot === undefined)
                 ?
                 <Button
                     onClick={() => joinGame(gID, pID)}
@@ -113,10 +117,14 @@ export default function Lobby({
 
     return (
         <Container>
-            <Form>
+            <Form onSubmit={e => e.preventDefault()}>
                 <Form.Group controlId="playerId">
                     <Form.Label>Enter your name</Form.Label>
-                    <Form.Control type="text" value={playerName} onChange={e => setPlayerName(e.target.value)}/>
+                    <Form.Control 
+                        type="text" 
+                        value={playerName} 
+                        onChange={e => setPlayerName(e.target.value)}
+                    />
                 </Form.Group>
 
                 <p>Welcome, {playerName}</p>

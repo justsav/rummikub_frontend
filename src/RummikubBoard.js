@@ -7,11 +7,10 @@ import Rack from './components/Rack'
 import Backend from 'react-dnd-html5-backend'
 import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
-import Lobby from './components/Lobby'
 import avatar from './static/avatar.svg'
 import { Redirect } from 'react-router-dom'
 
-const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}) => {
+const RummikubBoard = ({G, ctx, moves, playerID, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
   const handleMove = (coordinates) => {
     moves.MoveTile(coordinates, playerID, isCurrentPlayer)
