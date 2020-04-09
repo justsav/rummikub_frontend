@@ -39,7 +39,7 @@ export default function Tile({tile, x, y, location}) {
         color: labelColor(tile),
       }}
     >
-      {tile.slice(1)}
+      {tile.slice(1) !== 'K' ? tile.slice(1) : <img src='https://i.imgur.com/kNuyoc2.png' tag='joker face' width='32' />}
     </div>
   )
 
