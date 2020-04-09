@@ -63,7 +63,7 @@ const PullTile = {
     const playerRack = G.players[playerID]
     const index = playerRack.findIndex(element => element === null)
 
-    if (index) {
+    if (index !== undefined) {
       playerRack[index] = G.secret.pool.pop()
     } else {
       throw new Error('Player rack is full')
