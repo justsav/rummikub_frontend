@@ -74,10 +74,16 @@ const PullTile = {
     const playerRack = G.players[playerID]
     const index = playerRack.findIndex(element => element === null)
 
-    if (index !== undefined) {
-      playerRack[index] = G.secret.pool.pop()
+    if (index >= 0) {
+      const tile = G.secret.pool.pop()
+      if (tile === undefined) {
+        console.log('POOL IS EMPTY')
+        return INVALID_MOVE
+      }
+      playerRack[index] = tile// pop can fail
     } else {
-      throw new Error('Player rack is full')
+      console.log('Player rack is full')
+      return INVALID_MOVE
     }
   },
   client: false
@@ -109,7 +115,7 @@ const Rummikub = {
     }
   },
 
-  playerView: PlayerView.STRIP_SECRETS, // TODO: Remove when deploying to production
+  playerView: PlayerView.STRIP_SECRETS,
 
 }
 
