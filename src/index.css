@@ -27,6 +27,23 @@ code {
 
 #opponent-info {
   text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+  }
+
+.avatar > img {
+  width: 65px;
+}
+
+.avatar {
+  width: 65px;
+}
+
+.avatar > p {
+  margin-bottom: 0px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 #end-turn {

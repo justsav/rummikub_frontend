@@ -1,16 +1,34 @@
 import React from 'react'
+import { DndProvider } from 'react-dnd'
+import { Container, Row, Col } from 'react-bootstrap'
+
 import MainBoard from './components/MainBoard'
 import Rack from './components/Rack'
-import { DndProvider } from 'react-dnd'
 import Backend from 'react-dnd-html5-backend'
 import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
-import { Container, Row, Col } from 'react-bootstrap';
+import Lobby from './components/Lobby'
+import avatar from './static/avatar.svg'
 
-const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
+const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
   const handleMove = (coordinates) => {
     moves.MoveTile(coordinates, playerID, isCurrentPlayer)
+  }
+
+  const opponents = []
+  for (const [index, value] of gameMetadata.entries()) {
+    console.log(playerID)
+    console.log(value.id)
+    if (playerID !== value.id.toString() && value.name) {
+      opponents.push(
+        <span className="avatar">
+          <img src={avatar} alt="player avatar" />
+          <p>Player {value.id + 1}:</p>
+          <p>{value.name}</p>
+        </span>
+      )
+    }
   }
 
   return (
@@ -23,7 +41,7 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
               <p>RULES | EXIT</p>
             </Col>
             <Col id='opponent-info' md={6}>
-              <p>TODO: OPPONENT INFO</p>
+              {opponents}
             </Col>
             <Col id='end-turn' md={3}>
               {isCurrentPlayer && <EndTurnButton FinishTurn={moves.FinishTurn}/>}
@@ -36,8 +54,9 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
           </Row>
           <Row id='bottom-row'>
             <Col id='self-info' md={2}>
-              <p>Player {playerID} {isCurrentPlayer && ' - YOUR TURN'}</p>
-              <p>TODO: POINTS</p>
+
+              <p>Player {parseInt(playerID) + 1} {isCurrentPlayer && ' - YOUR TURN'}</p>
+              <p>Points: 125</p>
             </Col>
             <Col id='rack-container' md={8}>
               <Row id='rack-title'>
