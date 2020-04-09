@@ -8,6 +8,11 @@ import EndTurnButton from './components/EndTurnButton'
 import { Container, Row, Col } from 'react-bootstrap';
 
 const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
+  const isCurrentPlayer = ctx.currentPlayer === playerID
+  const handleMove = (coordinates) => {
+    moves.MoveTile(coordinates, playerID, isCurrentPlayer)
+  }
+
   return (
     <DndProvider backend={Backend}>
       <div>
@@ -21,17 +26,17 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
               <p>TODO: OPPONENT INFO</p>
             </Col>
             <Col id='end-turn' md={3}>
-              <EndTurnButton FinishTurn={moves.FinishTurn}/>
+              {isCurrentPlayer && <EndTurnButton FinishTurn={moves.FinishTurn}/>}
             </Col>
           </Row>
           <Row md={12}>
             <Container id='main-board' fluid>
-              <MainBoard {...{G, MoveTile: moves.MoveTile}}/>
+              <MainBoard {...{G, MoveTile: handleMove}}/>
             </Container>
           </Row>
           <Row id='bottom-row'>
             <Col id='self-info' md={2}>
-              <p>Player {playerID} {isActive && ' - YOUR TURN'}</p>
+              <p>Player {playerID} {isCurrentPlayer && ' - YOUR TURN'}</p>
               <p>TODO: POINTS</p>
             </Col>
             <Col id='rack-container' md={8}>
@@ -39,11 +44,11 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive}) => {
                 <h5>Your Tiles</h5>
               </Row>
               <Row id='rack-row'>
-                <Rack {...{playerRack: G.players[playerID], MoveTile: moves.MoveTile}}/>
+                <Rack {...{playerRack: G.players[playerID], MoveTile: handleMove}}/>
               </Row>
             </Col>
             <Col id='pull-tile' md={2}>
-              {isActive &&
+              {isCurrentPlayer &&
                 <React.Fragment>
                   <PullTileButton {...{playerID, PullTile: moves.PullTile}}/>
                 </React.Fragment>

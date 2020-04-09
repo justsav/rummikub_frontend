@@ -33,13 +33,16 @@ const initializeGame = (ctx) => {
   return G
 }
 
-const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}) => {
+const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}, playerID, isCurrentPlayer) => {
+  if (!isCurrentPlayer && (toLocation !== 'rack' || fromLocation !== 'rack')) return INVALID_MOVE
+  if (isCurrentPlayer && fromLocation === 'board' && toLocation === 'rack') return INVALID_MOVE
+
   const convertXYtoIndex = (location, x, y) => {
     switch (location) {
       case 'board':
         return [ G.cells, y * BOARD_WIDTH + x ]
       case 'rack':
-        return [ G.players[ctx.currentPlayer], y * RACK_WIDTH + x ]
+        return [ G.players[playerID], y * RACK_WIDTH + x ]
       default:
         console.err('Failed to convert', x, y, location)
         throw new Error('invalid location!')
@@ -90,8 +93,22 @@ const Rummikub = {
 
   phases: {
     play: {
-      moves: {MoveTile, FinishTurn, PullTile},
-      start: true
+      start: true,
+      turn: {
+        activePlayers: {
+          currentPlayer: 'playBoard',
+          others: 'playRack'
+        },
+        stages: {
+          playBoard: {
+            moves: {MoveTile, FinishTurn, PullTile}
+
+          },
+          playRack: {
+            moves: {MoveTile}
+          }
+        }
+      }
     }
   },
 
