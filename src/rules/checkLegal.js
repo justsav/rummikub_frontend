@@ -49,6 +49,7 @@ export function checkLegal(board) {
       let numArray = []
       let alphaArray = []
       for (let j = 0; j < combinations[i].length; j++) {
+        if(combinations[i].length < 3) return false
         let tile = combinations[i][j]
         if(numArray.length > 0 && tile === 'JK'){
           numArray.push((parseInt(numArray[numArray.length - 1]) + 1).toString())
@@ -66,10 +67,11 @@ export function checkLegal(board) {
           numArray.push(num)
         }
       }
-      if(!isConsecutive(numArray) || !allEqual(alphaArray)){
-        resultArray.push(false)
+
+      if(isConsecutive(numArray) && allEqual(alphaArray)){
+        resultArray.push(true)
       }
-      else{resultArray.push(true)}
+      else{resultArray.push(false)}
     }
     return resultArray
   }
@@ -78,7 +80,7 @@ export function checkLegal(board) {
     let resultArray = []
     const allEqual = (arr) => arr.every(item => item === arr[0])
     for (let i = 0; i < combinations.length; i++) {
-      if(combinations[i].length > 4) return false
+      if(combinations[i].length > 4 || combinations[i].length < 3) return false
       let numArray = []
       let alphaArray = []
       for (let j = 0; j < combinations[i].length; j++) {
@@ -99,10 +101,11 @@ export function checkLegal(board) {
     }
     return resultArray
   }
+
   let resultGroup = checkGroups(combinations)
   let resultRuns = checkRuns(combinations)
   for(let i = 0; i < resultRuns.length; i++){
-    if(resultGroup[i] === resultRuns[i]){
+    if(!resultGroup[i] && !resultRuns[i]){
       return false
     }
   }
