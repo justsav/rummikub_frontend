@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { DndProvider } from 'react-dnd'
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -17,7 +17,8 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   }
 
   const [opponents, setOpponents] = useState([])
-  
+  const stopFetching = useRef(false)
+
   useEffect(() => {
     const renderOpponents = (input) => {
       const opp = []
@@ -54,12 +55,15 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
 
     getMetadata(gameMetadata)
 
-    const interval = setInterval(() => {
-      getMetadata()
-    }, 5000)
-    return () => clearInterval(interval)
+    stopFetching.current = setInterval(() => getMetadata(), 5000)
+    return () => clearInterval(stopFetching.current)
   }, [gameMetadata, gameID, playerID])
   
+  useEffect(() => {
+    if ((opponents.length + 1) >= gameMetadata.length) {
+      clearInterval(stopFetching.current)
+    }
+  }, [opponents, gameMetadata])
 
   return (
     <DndProvider backend={Backend}>
