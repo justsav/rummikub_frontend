@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { DndProvider } from 'react-dnd'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Button, Container, Row, Col } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 import MainBoard from './components/MainBoard'
 import Rack from './components/Rack'
@@ -9,8 +10,11 @@ import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
 import Lobby from './components/Lobby'
 import avatar from './static/avatar.svg'
+import Rules from './components/Rules'
 
 const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}) => {
+  const [show, setShow] = useState(false);
+  
   const isCurrentPlayer = ctx.currentPlayer === playerID
   const handleMove = (coordinates) => {
     moves.MoveTile(coordinates, playerID, isCurrentPlayer)
@@ -18,8 +22,6 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}
 
   const opponents = []
   for (const [index, value] of gameMetadata.entries()) {
-    console.log(playerID)
-    console.log(value.id)
     if (playerID !== value.id.toString() && value.name) {
       opponents.push(
         <span className="avatar">
@@ -38,7 +40,19 @@ const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}
           <Row id='top-row'>
             <Col id='logo-area' md={3}>
               <img src='https://rummikub.co.nz/wp-content/uploads/2019/08/Rummikub_logo-4.png' alt='game logo' width="200" />
-              <p>RULES | EXIT</p>
+              <p>
+              <div className='admin-btn-container'>
+                <Button className='small-btn' variant="dark" size="sm" onClick={() => setShow(true)}>
+                  How to Play
+                </Button>
+                {/* <LinkContainer to='/lobby'> */}
+                  <Button className='small-btn' variant="dark" size="sm" >
+                    Exit Game
+                  </Button>
+                {/* </LinkContainer> */}
+                </div>
+              </p>
+              {<Rules {...{show, setShow}} />}
             </Col>
             <Col id='opponent-info' md={6}>
               {opponents}
