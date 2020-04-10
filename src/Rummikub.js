@@ -1,4 +1,5 @@
 import { PlayerView, INVALID_MOVE } from 'boardgame.io/core'
+import _ from 'lodash'
 import {BOARD_WIDTH, BOARD_HEIGHT, RACK_WIDTH, RACK_HEIGHT} from './constants'
 import {checkLegal} from './rules/checkLegal'
 import {check30} from './rules/check30'
@@ -98,6 +99,10 @@ const FinishTurn = {
 
 const PullTile = {
   move: (G, ctx, playerID) => {
+    if (!_.isEqual(G.cells, G.secret.boardSnapshot)) {
+      console.error('Board has been changed')
+      return INVALID_MOVE
+    }
     const playerRack = G.players[playerID]
     const index = playerRack.findIndex(element => element === null)
 
@@ -112,6 +117,7 @@ const PullTile = {
       console.log('Player rack is full')
       return INVALID_MOVE
     }
+    ctx.events.endTurn()
   },
   client: false
 }
