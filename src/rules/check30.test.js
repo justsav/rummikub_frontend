@@ -55,8 +55,9 @@ const runs = [
   [['B12', 'B13', 'B1', 'B2'], false], //mismatched run
   [['B1', 'B2', 'B3', 'JK', 'B5', 'B6', 'B7'], true],// run with joker
   [['JK', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7'], true],// run with joker at beginning
-  [['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'JK'], true],// run with joker at end
-
+  [['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'JK'], true], // run with joker at end
+  [['B11', 'B12', 'B13', 'JK'], false],// joker overflow
+  [['JK', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6'], false],// joker overflow
 ]
 
 test.each(runs)('isRun %s', (group, res) => {
