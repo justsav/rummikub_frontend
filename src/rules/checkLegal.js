@@ -1,5 +1,5 @@
 // This functions returns array with sub-arrays of all the combinations in the Game board.
-function getAllCombinations(board) {
+export function getAllCombinations(board) {
   const rows = []
   for (let i = 0; i < board.length; i += 16) {
     rows.push(board.slice(i, i + 16))
@@ -116,4 +116,3 @@ export function checkLegal(board) {
   }
   return true
 }
-

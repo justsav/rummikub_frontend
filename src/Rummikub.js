@@ -1,6 +1,8 @@
 import { PlayerView, INVALID_MOVE } from 'boardgame.io/core'
+import _ from 'lodash'
 import {BOARD_WIDTH, BOARD_HEIGHT, RACK_WIDTH, RACK_HEIGHT} from './constants'
 import {checkLegal} from './rules/checkLegal'
+import {check30} from './rules/check30'
 
 const tiles = [
   'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13',
@@ -14,7 +16,13 @@ const tiles = [
   'JK', 'JK'
 ]
 
-
+const createMeld = (players) => {
+  const meldObject = {}
+  players.forEach(player => {
+    meldObject[player] = false
+  })
+  return meldObject
+}
 
 const initializeGame = (ctx) => {
   const G = {
@@ -23,6 +31,7 @@ const initializeGame = (ctx) => {
       pool: ctx.random.Shuffle(tiles)
     },
     players: {},// Available to Player's own object, like players['1']
+    meld: createMeld(ctx.playOrder)
   }
   //Initial draw of cards
   ctx.playOrder.forEach((player) => {
@@ -69,15 +78,31 @@ const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}, pl
   origin[originIndex] = dTile
 }
 
-const FinishTurn = (G, ctx) => {
-  if (!checkLegal(G.cells)) {
-    return INVALID_MOVE
-  }
-  ctx.events.endTurn()
+const FinishTurn = {
+  move: (G, ctx) => {
+    if (!checkLegal(G.cells)) {
+      console.error('Board is not legal')
+      return INVALID_MOVE
+    }
+    if(G.meld[ctx.currentPlayer] === false){
+      if (!check30(G.secret.boardSnapshot, G.cells)) {
+        console.error('Meld is not satisfied')
+        return INVALID_MOVE
+      } else {
+        G.meld[ctx.currentPlayer] = true
+      }
+    }
+    ctx.events.endTurn()
+  },
+  client: false
 }
 
 const PullTile = {
   move: (G, ctx, playerID) => {
+    if (!_.isEqual(G.cells, G.secret.boardSnapshot)) {
+      console.error('Board has been changed')
+      return INVALID_MOVE
+    }
     const playerRack = G.players[playerID]
     const index = playerRack.findIndex(element => element === null)
 
@@ -92,6 +117,7 @@ const PullTile = {
       console.log('Player rack is full')
       return INVALID_MOVE
     }
+    ctx.events.endTurn()
   },
   client: false
 }

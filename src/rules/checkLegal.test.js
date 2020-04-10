@@ -36,7 +36,8 @@ const input = [
   [['R8', 'B8', 'K8', 'O8'], true],
   [['B9', 'B10', 'B11', 'B12', 'B13'], true],
 
-  [['K11', 'JK', 'O11', null, 'B1', 'O1', 'R1', 'K1', null, 'O13', 'B13', 'K13', null, null, null, null, 'K1','K2','K3','K4','K5','K6', null, 'R8', 'B8', 'K8', 'O8', null, null, null, null, null, null, null, 'B9', 'B10', 'B11', 'B12', 'B13'], true]
+  [['K11', 'JK', 'O11', null, 'B1', 'O1', 'R1', 'K1', null, 'O13', 'B13', 'K13', null, null, null, null, 'K1','K2','K3','K4','K5','K6', null, 'R8', 'B8', 'K8', 'O8', null, null, null, null, null, null, null, 'B9', 'B10', 'B11', 'B12', 'B13'], true],
+  [[null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'R7', 'R8', 'R9', 'R10'], false]
 
 ]
 
