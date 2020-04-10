@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { DndProvider } from 'react-dnd'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Button, Container, Row, Col } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
 
 import MainBoard from './components/MainBoard'
 import Rack from './components/Rack'
@@ -8,10 +10,11 @@ import Backend from 'react-dnd-html5-backend'
 import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
 import avatar from './static/avatar.svg'
-import { Redirect } from 'react-router-dom'
+import Rules from './components/Rules'
 
 const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
+  const [show, setShow] = useState(false)
   const handleMove = (coordinates) => {
     moves.MoveTile(coordinates, playerID, isCurrentPlayer)
   }
@@ -75,7 +78,19 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
             <Row id='top-row'>
               <Col id='logo-area' md={3}>
                 <img src='https://rummikub.co.nz/wp-content/uploads/2019/08/Rummikub_logo-4.png' alt='game logo' width="200" />
-                <p>RULES | EXIT</p>
+                <p>
+                <div className='admin-btn-container'>
+                  <Button className='small-btn' variant="dark" size="sm" onClick={() => setShow(true)}>
+                    How to Play
+                  </Button>
+                  <LinkContainer to='/lobby'>
+                    <Button className='small-btn' variant="dark" size="sm" >
+                      Exit Game
+                    </Button>
+                  </LinkContainer>
+                  </div>
+                </p>
+                {<Rules {...{show, setShow}} />}
               </Col>
               <Col id='opponent-info' md={6}>
                 {opponents}
@@ -117,7 +132,6 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
       </DndProvider>
     )
   }
-
 }
 
 export default RummikubBoard;

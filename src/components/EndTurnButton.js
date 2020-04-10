@@ -7,7 +7,7 @@ const EndTurnButton = ({FinishTurn}) => {
       FinishTurn()
     }
   return (
-      <Button id='et-btn' variant="primary" size="lg" onClick={handleClick}>
+      <Button id='et-btn' variant="dark" size="lg" onClick={handleClick}>
       End Turn
       </Button>
   );
