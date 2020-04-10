@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { DndProvider } from 'react-dnd'
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -7,29 +7,63 @@ import Rack from './components/Rack'
 import Backend from 'react-dnd-html5-backend'
 import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
-import Lobby from './components/Lobby'
 import avatar from './static/avatar.svg'
+import { Redirect } from 'react-router-dom'
 
-const RummikubBoard = ({G, ctx, moves, events, playerID, isActive, gameMetadata}) => {
+const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
   const handleMove = (coordinates) => {
     moves.MoveTile(coordinates, playerID, isCurrentPlayer)
   }
 
-  const opponents = []
-  for (const [index, value] of gameMetadata.entries()) {
-    console.log(playerID)
-    console.log(value.id)
-    if (playerID !== value.id.toString() && value.name) {
-      opponents.push(
-        <span className="avatar">
-          <img src={avatar} alt="player avatar" />
-          <p>Player {value.id + 1}:</p>
-          <p>{value.name}</p>
-        </span>
-      )
+  const [opponents, setOpponents] = useState([])
+  const stopFetching = useRef(false)
+
+  useEffect(() => {
+    const renderOpponents = (input) => {
+      const opp = []
+      try {
+        for (const [, value] of input.entries()) {
+          if (playerID !== value.id.toString() && value.name) {
+            opp.push(
+              <span key={value.id} className="avatar">
+                <img src={avatar} alt="player avatar" />
+                <p>Player {value.id + 1}:</p>
+                <p>{value.name}</p>
+              </span>
+            )
+          }
+        }
+        setOpponents(opp)
+      } catch (err) {
+        return <Redirect to="/lobby"/>
+      }
     }
-  }
+    
+    const getMetadata = (init) => {
+      if (init) {
+        renderOpponents(init)
+      } else {
+        fetch(`/games/rummikub/${gameID}`)
+        .then(res => res.json())
+        .then(data => {
+          renderOpponents(data.players)
+        })
+        .catch(err => console.error(err))
+      }
+    }
+
+    getMetadata(gameMetadata)
+
+    stopFetching.current = setInterval(() => getMetadata(), 5000)
+    return () => clearInterval(stopFetching.current)
+  }, [gameMetadata, gameID, playerID])
+  
+  useEffect(() => {
+    if ((opponents.length + 1) >= gameMetadata.length) {
+      clearInterval(stopFetching.current)
+    }
+  }, [opponents, gameMetadata])
 
   return (
     <DndProvider backend={Backend}>
