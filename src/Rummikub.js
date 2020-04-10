@@ -34,6 +34,13 @@ const initializeGame = (ctx) => {
   return G
 }
 
+const captureSnapshot = (G, ctx) => {
+  const copyBoard = Array.from(G.cells)
+  const copyRack = Array.from(G.players[ctx.currentPlayer])
+  G.secret.boardSnapshot = copyBoard
+  G.secret.rackSnapshot = copyRack
+}
+
 const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}, playerID, isCurrentPlayer) => {
   if (!isCurrentPlayer && (toLocation !== 'rack' || fromLocation !== 'rack')) return INVALID_MOVE
   if (isCurrentPlayer && fromLocation === 'board' && toLocation === 'rack') return INVALID_MOVE
@@ -80,11 +87,19 @@ const PullTile = {
         console.log('POOL IS EMPTY')
         return INVALID_MOVE
       }
-      playerRack[index] = tile// pop can fail
+      playerRack[index] = tile
     } else {
       console.log('Player rack is full')
       return INVALID_MOVE
     }
+  },
+  client: false
+}
+
+const ResetBoard = {
+  move: (G, ctx) => {
+    G.cells = G.secret.boardSnapshot
+    G.players[ctx.currentPlayer] = G.secret.rackSnapshot
   },
   client: false
 }
@@ -98,14 +113,15 @@ const Rummikub = {
     play: {
       start: true,
       turn: {
+        onBegin: (G, ctx) => captureSnapshot(G, ctx),
         activePlayers: {
           currentPlayer: 'playBoard',
           others: 'playRack'
         },
         stages: {
           playBoard: {
-            moves: {MoveTile, FinishTurn, PullTile}
-
+            moves: {MoveTile, FinishTurn, PullTile, ResetBoard}
+            
           },
           playRack: {
             moves: {MoveTile}

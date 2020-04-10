@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { DndProvider } from 'react-dnd'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 import MainBoard from './components/MainBoard'
 import Rack from './components/Rack'
@@ -22,22 +22,18 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   useEffect(() => {
     const renderOpponents = (input) => {
       const opp = []
-      try {
-        for (const [, value] of input.entries()) {
-          if (playerID !== value.id.toString() && value.name) {
-            opp.push(
-              <span key={value.id} className="avatar">
-                <img src={avatar} alt="player avatar" />
-                <p>Player {value.id + 1}:</p>
-                <p>{value.name}</p>
-              </span>
-            )
-          }
+      for (const [, value] of input.entries()) {
+        if (playerID !== value.id.toString() && value.name) {
+          opp.push(
+            <span key={value.id} className="avatar">
+              <img src={avatar} alt="player avatar" />
+              <p>Player {value.id + 1}:</p>
+              <p>{value.name}</p>
+            </span>
+          )
         }
-        setOpponents(opp)
-      } catch (err) {
-        return <Redirect to="/lobby"/>
       }
+      setOpponents(opp)
     }
     
     const getMetadata = (init) => {
@@ -60,58 +56,68 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   }, [gameMetadata, gameID, playerID])
   
   useEffect(() => {
-    if ((opponents.length + 1) >= gameMetadata.length) {
+    if (gameID && playerID && (opponents.length + 1) >= gameMetadata.length) {
       clearInterval(stopFetching.current)
     }
   }, [opponents, gameMetadata])
 
-  return (
-    <DndProvider backend={Backend}>
-      <div>
-        <Container id='master' fluid>
-          <Row id='top-row'>
-            <Col id='logo-area' md={3}>
-              <img src='https://rummikub.co.nz/wp-content/uploads/2019/08/Rummikub_logo-4.png' alt='game logo' width="200" />
-              <p>RULES | EXIT</p>
-            </Col>
-            <Col id='opponent-info' md={6}>
-              {opponents}
-            </Col>
-            <Col id='end-turn' md={3}>
-              {isCurrentPlayer && <EndTurnButton FinishTurn={moves.FinishTurn}/>}
-            </Col>
-          </Row>
-          <Row md={12}>
-            <Container id='main-board' fluid>
-              <MainBoard {...{G, MoveTile: handleMove}}/>
-            </Container>
-          </Row>
-          <Row id='bottom-row'>
-            <Col id='self-info' md={2}>
+  const handleReset = () => {
+    moves.ResetBoard()
+  }
 
-              <p>Player {parseInt(playerID) + 1} {isCurrentPlayer && ' - YOUR TURN'}</p>
-              <p>Points: 125</p>
-            </Col>
-            <Col id='rack-container' md={8}>
-              <Row id='rack-title'>
-                <h5>Your Tiles</h5>
-              </Row>
-              <Row id='rack-row'>
-                <Rack {...{playerRack: G.players[playerID], MoveTile: handleMove}}/>
-              </Row>
-            </Col>
-            <Col id='pull-tile' md={2}>
-              {isCurrentPlayer &&
-                <React.Fragment>
-                  <PullTileButton {...{playerID, PullTile: moves.PullTile}}/>
-                </React.Fragment>
-              }
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </DndProvider>
-  )
+  if (!gameID && !playerID) {
+    return <Redirect to="/lobby"/>
+  } else {
+    return (
+      <DndProvider backend={Backend}>
+        <div>
+          <Container id='master' fluid>
+            <Row id='top-row'>
+              <Col id='logo-area' md={3}>
+                <img src='https://rummikub.co.nz/wp-content/uploads/2019/08/Rummikub_logo-4.png' alt='game logo' width="200" />
+                <p>RULES | EXIT</p>
+              </Col>
+              <Col id='opponent-info' md={6}>
+                {opponents}
+              </Col>
+              <Col id='end-turn' md={3}>
+                {isCurrentPlayer && <EndTurnButton FinishTurn={moves.FinishTurn}/>}
+              </Col>
+            </Row>
+            <Row md={12}>
+              <Container id='main-board' fluid>
+                <MainBoard {...{G, MoveTile: handleMove}}/>
+              </Container>
+            </Row>
+            <Row id='bottom-row'>
+              <Col id='self-info' md={2}>
+
+                <p>Player {parseInt(playerID) + 1} {isCurrentPlayer && ' - YOUR TURN'}</p>
+                <p>Points: 125</p>
+              </Col>
+              <Col id='rack-container' md={8}>
+                <Row id='rack-title'>
+                  <h5>Your Tiles</h5>
+                </Row>
+                <Row id='rack-row'>
+                  <Rack {...{playerRack: G.players[playerID], MoveTile: handleMove}}/>
+                </Row>
+              </Col>
+              <Col id='pull-tile' md={2}>
+                {isCurrentPlayer &&
+                  <React.Fragment>
+                    <PullTileButton {...{playerID, PullTile: moves.PullTile}}/>
+                    <Button id='et-btn' variant="primary" size="lg" onClick={handleReset}>Reset Board</Button>
+                  </React.Fragment>
+                }
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      </DndProvider>
+    )
+  }
+
 }
 
 export default RummikubBoard;
