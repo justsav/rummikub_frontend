@@ -9,7 +9,7 @@ import Rack from './components/Rack'
 import Backend from 'react-dnd-html5-backend'
 import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
-import avatar from './static/avatar.svg'
+import avatar from './static/av.png'
 import Rules from './components/Rules'
 
 const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
@@ -30,7 +30,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
           opp.push(
             <span key={value.id} className="avatar">
               <img src={avatar} alt="player avatar" />
-              <p>Player {value.id + 1}:</p>
+              <p>PLAYER {value.id + 1}:</p>
               <p>{value.name}</p>
             </span>
           )
@@ -77,7 +77,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
           <Container id='master' fluid>
             <Row id='top-row'>
               <Col id='logo-area' md={3}>
-                <img src='https://rummikub.co.nz/wp-content/uploads/2019/08/Rummikub_logo-4.png' alt='game logo' width="200" />
+                <img src='https://rummikub.co.nz/wp-content/uploads/2019/08/Rummikub_logo-4.png' alt='game logo' width="275" />
                 <p>
                 <div className='admin-btn-container'>
                   <Button className='small-btn' variant="dark" size="sm" onClick={() => setShow(true)}>
@@ -106,13 +106,15 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
             </Row>
             <Row id='bottom-row'>
               <Col id='self-info' md={2}>
-
-                <p>Player {parseInt(playerID) + 1} {isCurrentPlayer && ' - YOUR TURN'}</p>
-                <p>Points: 125</p>
+                <p>{isCurrentPlayer && 'YOUR TURN'}</p>
+                <p>PLAYER {parseInt(playerID) + 1}</p>
+                <div className="avatar">
+                  <img src={avatar} alt="player avatar" />
+                </div>
               </Col>
               <Col id='rack-container' md={8}>
                 <Row id='rack-title'>
-                  <h5>Your Tiles</h5>
+                  <h5>YOUR TILES</h5>
                 </Row>
                 <Row id='rack-row'>
                   <Rack {...{playerRack: G.players[playerID], MoveTile: handleMove}}/>
@@ -122,7 +124,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
                 {isCurrentPlayer &&
                   <React.Fragment>
                     <PullTileButton {...{playerID, PullTile: moves.PullTile}}/>
-                    <Button id='et-btn' variant="primary" size="lg" onClick={handleReset}>Reset Board</Button>
+                    <Button className='turn-btn' variant="warning" onClick={handleReset}>RESET BOARD</Button>
                   </React.Fragment>
                 }
               </Col>
