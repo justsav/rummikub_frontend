@@ -7,8 +7,8 @@ const PullTileButton = ({playerID, PullTile}) => {
     }
 
     return (
-        <Button id='pt-btn' variant="dark" size="lg" onClick={handleClick}>
-        + Pull Tile
+        <Button className='turn-btn' variant="dark" onClick={handleClick}>
+        + PULL TILE
         </Button>
     );
 }

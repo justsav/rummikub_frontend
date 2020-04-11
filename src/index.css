@@ -13,12 +13,12 @@ code {
 }
 
 #master {
-  background-color: cadetblue;
+  background-color: #157CB0;
   width: 100vw;
 }
 
 #top-row {
-    padding-top: 15px;
+    padding-top: 20px;
 }
 
 #logo-area {
@@ -30,7 +30,7 @@ code {
   display: flex;
   justify-content: space-evenly;
   padding-bottom: 10px;
-  }
+}
 
 .avatar > img {
   width: 65px;
@@ -41,15 +41,22 @@ code {
 }
 
 .avatar > p {
+  margin-top: 3px;
   margin-bottom: 0px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.8);
 }
 
 #end-turn {
   margin-top: 30px;
   text-align: right;
   padding-right: 40px;
+}
+
+#end-turn button {
+  font-weight: 700;
 }
 
 #main-board {
@@ -59,13 +66,23 @@ code {
 }
 
 #bottom-row {
-  padding-top: 15px;
+  padding-top: 20px;
   padding-bottom: 30px;
 }
 
 #self-info {
-  margin: auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  align-items: center;
+  color:white;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.8);
+  font-size: 1.2em;
+}
+
+#self-info > p {
+  margin-bottom: 0px;
+  font-weight: 500;
 }
 
 #rack-container {
@@ -76,6 +93,9 @@ code {
 #rack-title {
   height: 30px;
   justify-content: center;
+  color: white;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.8);
+  font-weight: bold;
 }
 
 #rack-row {
@@ -83,13 +103,22 @@ code {
 }
 
 #rack {
-  background-color:#734700;
-  border: 5px solid black;
+  background-color: #966f33;
+  background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+  border: 6px solid #6e5000;
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  margin-bottom: 40px;
 }
 
 #board {
-  background-color: darkgreen;
-  border: 2px solid black;
+  background: rgb(102,177,0);
+  background: radial-gradient(circle, rgba(102,177,0,1) 0%, rgba(20,40,0,1) 107%);
+  border: 3px solid black;
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
 }
 
 #pull-tile {
@@ -98,16 +127,27 @@ code {
   padding-right: 40px;
 }
 
+#pull-tile button {
+  font-weight: 700;
+}
+
+.turn-btn {
+  font-size: 1em;
+  min-width: 150px;
+  margin-top: 15px;
+}
+
 .admin-btn-container {
   display: flex;
   justify-content: center;
 }
 
 .admin-btn-container .small-btn {
-  width: 75px;
+  min-width: 80px;
   font-size: 10px;
   margin-left: 10px;
   margin-right: 10px;
+  font-weight: 700;
 }
 
 #rules-body {
@@ -118,4 +158,12 @@ code {
   text-align: center;
   font-weight: bold;
   margin-left: 30px;
+}
+
+.modal-body {
+  margin-right: 30px;
+}
+
+.modal-footer {
+  justify-content: center;
 }
