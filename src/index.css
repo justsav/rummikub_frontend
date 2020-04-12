@@ -40,6 +40,10 @@ code {
   width: 65px;
 }
 
+.avatar-active {
+  background-color: #FFFF00;
+}
+
 .avatar > p {
   margin-top: 3px;
   margin-bottom: 0px;
