@@ -114,5 +114,7 @@ export function isRun(combination) {
     }
   }
 
+  if (copy[copy.length-1] === 'JK' && copy[copy.length-2].substring(1) === '13') return false
+
   return isSameColor
 }
