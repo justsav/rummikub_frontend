@@ -20,8 +20,7 @@ export default function Square({x, y, location, MoveTile, children}) {
 
   const cellStyle = {
     position: 'relative',
-    border: '1px solid',
-    borderColor: 'rgba(255, 255, 255, .1)',
+    border: isOver ? '5px solid rgba(255, 255, 255, .5)' : '1px solid rgba(255, 255, 255, .1)',
     width: '100%',
     height: '52px',
     // backgroundColor: 'white',
