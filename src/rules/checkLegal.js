@@ -2,28 +2,50 @@
 export function getAllCombinations(board) {
   const rows = []
   for (let i = 0; i < board.length; i += 16) {
-    rows.push(board.slice(i, i + 16))
+    rows.push(board.slice(i, i+16))
   }
-  const allCombinations = []
-  let tempArray = []
 
-  for (let i = 0; i < rows.length; i++) {
-    for (let j = 0; j < rows[i].length; j++) {
-      if (rows[i][j] !== null) {
-        tempArray.push(rows[i][j])
-      }
-      if (rows[i][j] === null) {
-        if (tempArray.length > 0) {
-          allCombinations.push(tempArray)
-          tempArray = []
-        }
-      }
-    }
-    if (tempArray.length > 0) {
-      allCombinations.push(tempArray)
-    }
-  }
-  return allCombinations
+  // 2. Split each row by null
+  const stringRows = rows.map(row => row.toString())
+  // [
+  //   'B1,,B2,B3,,B5,B6,B7,B8,B9,,B11,B12,B13,B1,B2',
+  //   'B3,B4,B5,B6,,B8,B9,B10,B11,B12,B13'
+  // ]
+  const removeNulls = stringRows
+    .map(row => row.split(',,'))
+    .map(row => 
+      row.filter(comb => comb !== '' && comb !== ',')
+    )
+
+  // [
+  //   [ 'B1', 'B2,B3', 'B5,B6,B7,B8,B9', 'B11,B12,B13,B1,B2' ],
+  //   [ 'B3,B4,B5,B6', 'B8,B9,B10,B11,B12,B13' ]
+  // ]
+  const flatten = removeNulls.flat()
+  
+  // [
+  //   'B1',
+  //   'B2,B3',
+  //   'B5,B6,B7,B8,B9',
+  //   'B11,B12,B13,B1,B2',
+  //   'B3,B4,B5,B6',
+  //   'B8,B9,B10,B11,B12,B13'
+  // ]
+  const combinations = flatten.map(row => row.split(',').filter(elem => elem !== ''))
+
+  // [
+  //   [ 'B1' ],
+  //   [ 'B2', 'B3' ],
+  //   [ 'B5', 'B6', 'B7', 'B8', 'B9' ],
+  //   [ 'B11', 'B12', 'B13', 'B1', 'B2' ],
+  //   [ 'B3', 'B4', 'B5', 'B6' ],
+  //   [ 'B8', 'B9', 'B10', 'B11', 'B12', 'B13' ]
+  // ]
+  // const combNoEmpty = combinations.filter(elem => !_.isEqual(elem, ['']))
+  // console.log('combNoEmpty', combNoEmpty)
+
+
+  return combinations
 }
 
 /////////////////////////////////////////////////////////////////////

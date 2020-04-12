@@ -6,6 +6,7 @@ const input = [
   [[null, 'O1'], false], //empty and tile
   [['B1', 'B2', 'B3'], true], //Simple run
   [['B1', 'B2', 'JK'], true], //Simple run with Joker
+  [['B12', 'B13', 'JK'], true], //Simple run with Joker
   [['B1', 'JK', 'JK'], true],//Simple run with Jokers
   [['B1', 'K1', 'O1'], true],//'Simple group
   [['B1', 'K1', 'JK'], true],//Simple group with Joker
