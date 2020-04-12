@@ -6,7 +6,6 @@ export default function Rules({
                                   setShow,
                               }) {
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   return (
     <>

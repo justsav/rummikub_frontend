@@ -62,7 +62,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
     if (gameID && playerID && (opponents.length + 1) >= gameMetadata.length) {
       clearInterval(stopFetching.current)
     }
-  }, [opponents, gameMetadata])
+  }, [opponents, gameMetadata, gameID, playerID])
 
   const handleReset = () => {
     moves.ResetBoard()

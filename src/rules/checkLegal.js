@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 // This functions returns array with sub-arrays of all the combinations in the Game board.
 export function getAllCombinations(board) {
   const rows = []
