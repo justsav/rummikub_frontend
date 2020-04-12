@@ -116,8 +116,8 @@ const FinishTurn = {
 const PullTile = {
   move: (G, ctx, playerID) => {
     if (!_.isEqual(G.cells, G.secret.boardSnapshot)) {
-      console.error('Board has been changed')
-      return INVALID_MOVE
+      G.cells = G.secret.boardSnapshot
+      G.players[ctx.currentPlayer] = G.secret.rackSnapshot
     }
     const playerRack = G.players[playerID]
     const index = playerRack.findIndex(element => element === null)
