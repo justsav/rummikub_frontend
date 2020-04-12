@@ -59,7 +59,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
             <span key={value.id} className={value.id === parseInt(ctx.currentPlayer) ? 'avatar avatar-active' : 'avatar'}>
               <img src={avatar} alt="player avatar" />
               <p>PLAYER {value.id + 1}:</p>
-              <p>{value.name}</p>
+              {value.id === parseInt(ctx.currentPlayer) ? <p><mark>{value.name}</mark></p> : <p>{value.name}</p>}
             </span>
           )
         }
