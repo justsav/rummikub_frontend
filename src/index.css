@@ -37,11 +37,28 @@ code {
 }
 
 .avatar {
-  width: 65px;
+  text-align: center;
 }
 
-.avatar-active {
-  background-color: #FFFF00;
+@keyframes glowing {
+  0% { box-shadow: 0 0 -10px #FFFFFF; }
+  40% { box-shadow: 0 0 20px #FFFFFF; }
+  60% { box-shadow: 0 0 20px #FFFFFF; }
+  100% { box-shadow: 0 0 -10px #FFFFFF; }
+}
+
+.me-avatar-active {
+  border-radius: 150px;
+  width: 80px;
+  text-align: center;
+  animation: glowing 5000ms infinite;
+}
+
+.op-avatar-active {
+  border-radius: 150px;
+  width: 120px;
+  text-align: center;
+  animation: glowing 5000ms infinite;
 }
 
 .avatar > p {

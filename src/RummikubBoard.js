@@ -56,10 +56,10 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
       for (const [, value] of opponentsData.entries()) {
         if (playerID !== value.id.toString() && value.name) {
           opp.push(
-            <span key={value.id} className={value.id === parseInt(ctx.currentPlayer) ? 'avatar avatar-active' : 'avatar'}>
-              <img src={avatar} alt="player avatar" />
+            <span key={value.id} className={value.id === parseInt(ctx.currentPlayer) ? 'avatar op-avatar-active' : 'avatar'}>
               <p>PLAYER {value.id + 1}:</p>
-              {value.id === parseInt(ctx.currentPlayer) ? <p><mark>{value.name}</mark></p> : <p>{value.name}</p>}
+              {value.id === parseInt(ctx.currentPlayer) ? <p>{value.name}'s Turn</p> : <p>{value.name}</p>}
+              <img src={avatar} alt="player avatar" />
             </span>
           )
         }
@@ -113,7 +113,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
               <Col id='self-info' md={2}>
                 <p>{isCurrentPlayer && 'YOUR TURN'}</p>
                 <p>PLAYER {parseInt(playerID) + 1}</p>
-                <div className={isCurrentPlayer ? 'avatar avatar-active' : 'avatar'}>
+                <div className={isCurrentPlayer ? 'avatar me-avatar-active' : 'avatar'}>
                   <img src={avatar} alt="player avatar" />
                 </div>
               </Col>
