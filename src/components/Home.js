@@ -13,6 +13,7 @@ import km from '../static/km.jpeg'
 import sb from '../static/sb.jpeg'
 import js from '../static/js.jpeg'
 import Rules from './Rules'
+import poster from '../static/poster.jpg'
 
 const Home = () => {
   const [show, setShow] = useState(false)
@@ -22,7 +23,7 @@ const Home = () => {
         <header>
           <div className="overlay">
           </div>
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <video poster={poster} playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
               <source src={vid} type="video/mp4"/>
             </video>
 
@@ -53,7 +54,7 @@ const Home = () => {
                     <img src={ico1} alt='create game icon' width="80" />
                   </div>
                   <div className="col stepbox-desc">
-                    <p>Here is a description of creating the game. Here is a description of creating the game.</p>
+                    <p>Enter the game lobby and create a game of 2-4 players, or join existing games.</p>
                   </div>
                 </div>
               </div>
@@ -66,7 +67,7 @@ const Home = () => {
                     <img src={ico2} alt='invite friends icon' width="100"/>
                   </div>
                   <div className="col stepbox-desc">
-                    <p>Here is a description of inviting friends. Here is a description of inviting friends.</p>
+                    <p>Easily connect with friends and family to have them join you at the virtual table.</p>
                   </div>
                 </div>
               </div>
@@ -79,7 +80,7 @@ const Home = () => {
                     <img src={ico3} alt='play win icon' width="90" />
                   </div>
                   <div className="col stepbox-desc">
-                    <p>Here is a description of playing and winning. Here is a description of playing and winning.</p>
+                    <p>The fun begins! Put your tile game skills to the test and become a RummiKlub champion.</p>
                   </div>
                 </div>
               </div>
