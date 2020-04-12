@@ -1,0 +1,250 @@
+#body {
+  background-color: #f2f2f2;
+}
+
+header {
+  position: relative;
+  background-color: black;
+  height: 55vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header .container {
+  position: relative;
+  z-index: 2;
+  max-height: 55vh;
+}
+
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  header video {
+    display: none;
+  }
+}
+
+#logo-header {
+  margin-top: 18px;
+  margin-left: 2px;
+}
+
+#masthead-elements h1 {
+    color: white;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.8);
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 12px;
+    font-size: 50px;
+}
+
+#masthead-elements h3 {
+  color: white;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.8);
+  line-height: 1.3em;
+  font-weight: 400;
+  font-size: 26px;
+  margin-left: 4px;
+}
+
+.play-button button {
+  margin-top: 20px;
+  width: 150px;
+  font-weight: 600;
+  font-size: 20px;
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+}
+
+#stepbox-container .row {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.stepbox {
+  z-index: 3;
+  margin-top: -80px;
+  border-radius: 10px;
+  height: 230px;
+  max-width: 310px;
+  padding-right: 0px;
+  padding-left: 15px;
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+}
+
+.stepbox-title h2 {
+  margin-top: 15px;
+  padding: 10px;
+  padding-right: 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.stepbox-detail {
+  display: flex;
+  flex-direction: row;
+}
+
+#gameview-container {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 70px;
+  height: 380px;
+  border-radius: 10px;
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+}
+
+#gameview-img img {
+  margin-top: 30px;
+  margin-left: 15px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 30px;
+  width: 420px;
+  display: flex;
+  justify-content: center;
+}
+
+#gameview-detail {
+  margin-top: 30px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  padding-right: 55px;
+  padding-left: 60px;
+}
+
+#gameview-detail h1 {
+  font-weight: 600;
+}
+
+.stepbox-icon1 {
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 0px;
+  max-width: 100px;
+}
+
+.stepbox-icon2 {
+  padding-top: 20px;
+  padding-left: 2px;
+  padding-right: 50px;
+  max-width: 100px;
+  margin-right: 5px;
+}
+
+.stepbox-icon3 {
+  padding-top: 20px;
+  padding-left: 3px;
+  padding-right: 0px;
+  max-width: 100px;
+}
+
+.stepbox-desc p {
+  padding-right: 5px;
+}
+
+#belt {
+  margin-left: 0px;
+  margin-top: 70px;
+  width: 100%;
+  height: 100px;
+  background-color: #4d4d4c;
+}
+
+.home-rules {
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.8);
+}
+
+.home-rules img {
+  margin-top: -2px;
+  transform: rotate(-10deg);
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+}
+
+.home-rules button {
+  font-weight: 600;
+  font-size: 17px;
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
+}
+
+#hall-fame {
+  margin-top: 90px;
+  padding-bottom: 110px;
+}
+
+.hall-fame-title {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.hall-fame-title h2 {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+#hall-fame-body {
+  text-align: center;
+}
+
+#hall-fame-body img {
+  width: 160px;
+  height: 160px;
+  box-sizing: border-box;
+  background-clip: content-box;
+  border: 5px solid #4d4d4c;
+  border-radius: 49.9%;
+  margin-bottom: 20px;
+}
+
+#hall-fame-body button {
+  font-weight: 500;
+}
+
+#copyright {
+  text-align: center;
+  padding-bottom: 20px;
+}

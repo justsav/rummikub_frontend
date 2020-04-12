@@ -161,6 +161,8 @@ code {
 .admin-btn-container {
   display: flex;
   justify-content: center;
+  margin-top: 15px;
+  padding-right: 10px;
 }
 
 .admin-btn-container .small-btn {
@@ -187,4 +189,8 @@ code {
 
 .modal-footer {
   justify-content: center;
+}
+
+#tile-style img {
+  vertical-align: text-top;
 }
