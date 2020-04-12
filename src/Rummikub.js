@@ -93,6 +93,7 @@ const FinishTurn = {
       console.error('Board is not legal')
       return INVALID_MOVE
     }
+    
     if(G.meld[ctx.currentPlayer] === false){
       if (!check30(G.secret.boardSnapshot, G.cells)) {
         console.error('Meld is not satisfied')
@@ -101,6 +102,12 @@ const FinishTurn = {
         G.meld[ctx.currentPlayer] = true
       }
     }
+    
+    if (_.isEqual(G.secret.boardSnapshot, G.cells)) {
+      console.log('Player hasn\'t made a move yet')
+      return INVALID_MOVE
+    }
+
     ctx.events.endTurn()
   },
   client: false
