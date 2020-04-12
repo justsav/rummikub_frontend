@@ -52,7 +52,6 @@ const captureSnapshot = (G, ctx) => {
 
 const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}, playerID, isCurrentPlayer) => {
   if (!isCurrentPlayer && (toLocation !== 'rack' || fromLocation !== 'rack')) return INVALID_MOVE
-  if (isCurrentPlayer && fromLocation === 'board' && toLocation === 'rack') return INVALID_MOVE
 
   const convertXYtoIndex = (location, x, y) => {
     switch (location) {
@@ -72,6 +71,16 @@ const MoveTile = (G, ctx, {fromLocation, fromX, fromY, toLocation, toX, toY}, pl
   // Copy
   const oTile = origin[originIndex]
   const dTile = destination[destinationIndex]
+  
+  // Disallow swapping on a non-empty tile - less headache
+  if (dTile !== null) return INVALID_MOVE
+
+  // Prevent all moves from board to rack except if person has initial meld and the tile is a joker
+  if (isCurrentPlayer && fromLocation === 'board' && toLocation === 'rack') {
+    if (!G.meld[ctx.currentPlayer] && oTile !== 'JK') {
+      return INVALID_MOVE
+    }
+  }
 
   // Swap
   destination[destinationIndex] = oTile
