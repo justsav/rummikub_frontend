@@ -84,7 +84,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
             <Row id='top-row'>
               <Col id='logo-area' md={3}>
                 <img src={logo} alt='game logo' width="275" />
-                <p>
+                <div>
                 <div className='admin-btn-container'>
                   <Button className='small-btn' variant="dark" size="sm" onClick={() => setShow(true)}>
                     How to Play
@@ -95,7 +95,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
                     </Button>
                   </LinkContainer>
                   </div>
-                </p>
+                </div>
                 {<Rules {...{show, setShow}} />}
               </Col>
               <Col id='opponent-info' md={6}>
