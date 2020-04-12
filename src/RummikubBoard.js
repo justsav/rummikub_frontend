@@ -11,6 +11,7 @@ import PullTileButton from './components/PullTileButton'
 import EndTurnButton from './components/EndTurnButton'
 import avatar from './static/av.png'
 import Rules from './components/Rules'
+import logo from './static/logo.svg'
 
 const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
@@ -77,7 +78,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
           <Container id='master' fluid>
             <Row id='top-row'>
               <Col id='logo-area' md={3}>
-                <img src='https://rummikub.co.nz/wp-content/uploads/2019/08/Rummikub_logo-4.png' alt='game logo' width="275" />
+                <img src={logo} alt='game logo' width="275" />
                 <p>
                 <div className='admin-btn-container'>
                   <Button className='small-btn' variant="dark" size="sm" onClick={() => setShow(true)}>

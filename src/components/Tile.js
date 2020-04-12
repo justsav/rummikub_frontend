@@ -1,6 +1,7 @@
 import React from 'react'
 import { ItemTypes } from '../constants'
 import { useDrag } from 'react-dnd'
+import face from '../static/face.svg'
 
 export default function Tile({tile, x, y, location}) {
   const [{isDragging}, drag] = useDrag({
@@ -27,6 +28,7 @@ export default function Tile({tile, x, y, location}) {
 
   return (
     <div
+      id='tile-style'
       ref={drag}
       style={{
         opacity: isDragging ? 0.5 : 1,
@@ -39,7 +41,7 @@ export default function Tile({tile, x, y, location}) {
         color: labelColor(tile),
       }}
     >
-      {tile.slice(1) !== 'K' ? tile.slice(1) : <img src='https://i.imgur.com/kNuyoc2.png' tag='joker face' width='32' alt="Joker"/>}
+      {tile.slice(1) !== 'K' ? tile.slice(1) : <img src={face} tag='joker face' width='32' alt="joker face tile" />}
     </div>
   )
 
