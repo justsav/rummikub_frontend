@@ -19,34 +19,20 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
     moves.MoveTile(coordinates, playerID, isCurrentPlayer)
   }
 
+  const [opponentsData, setOpponentsData] = useState([])
   const [opponents, setOpponents] = useState([])
   const stopFetching = useRef(false)
 
   useEffect(() => {
-    const renderOpponents = (input) => {
-      const opp = []
-      for (const [, value] of input.entries()) {
-        if (playerID !== value.id.toString() && value.name) {
-          opp.push(
-            <span key={value.id} className="avatar">
-              <img src={avatar} alt="player avatar" />
-              <p>PLAYER {value.id + 1}:</p>
-              <p>{value.name}</p>
-            </span>
-          )
-        }
-      }
-      setOpponents(opp)
-    }
-    
     const getMetadata = (init) => {
       if (init) {
-        renderOpponents(init)
+        setOpponentsData(init)
+        // renderOpponents(init)
       } else {
         fetch(`/games/rummikub/${gameID}`)
         .then(res => res.json())
         .then(data => {
-          renderOpponents(data.players)
+          setOpponentsData(data.players)
         })
         .catch(err => console.error(err))
       }
@@ -63,6 +49,25 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
       clearInterval(stopFetching.current)
     }
   }, [opponents, gameMetadata, gameID, playerID])
+
+  useEffect(() => {
+    const renderOpponents = () => {
+      const opp = []
+      for (const [, value] of opponentsData.entries()) {
+        if (playerID !== value.id.toString() && value.name) {
+          opp.push(
+            <span key={value.id} className={value.id === parseInt(ctx.currentPlayer) ? 'avatar op-avatar-active' : 'avatar'}>
+              <p>PLAYER {value.id + 1}:</p>
+              {value.id === parseInt(ctx.currentPlayer) ? <p>{value.name}'s Turn</p> : <p>{value.name}</p>}
+              <img src={avatar} alt="player avatar" />
+            </span>
+          )
+        }
+      }
+      setOpponents(opp)
+    }
+    renderOpponents()
+  }, [opponentsData, ctx.currentPlayer, playerID])
 
   const handleReset = () => {
     moves.ResetBoard()
@@ -108,7 +113,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
               <Col id='self-info' md={2}>
                 <p>{isCurrentPlayer && 'YOUR TURN'}</p>
                 <p>PLAYER {parseInt(playerID) + 1}</p>
-                <div className="avatar">
+                <div className={isCurrentPlayer ? 'avatar me-avatar-active' : 'avatar'}>
                   <img src={avatar} alt="player avatar" />
                 </div>
               </Col>
