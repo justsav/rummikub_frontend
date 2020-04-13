@@ -8,10 +8,19 @@ export default function MyGame({
   playerID,
   credentials,
   leaveGame,
+  setGameID,
+  setPlayerID,
+  setCredentials
 }) {
   const history = useHistory()
 
   const handleLeave = () => {
+    localStorage.removeItem('gameID')
+    localStorage.removeItem('playerID')
+    localStorage.removeItem('credentials')
+    setGameID('')
+    setPlayerID('')
+    setCredentials('')
     leaveGame()
   }
 
