@@ -31,7 +31,11 @@ export default function Gameover({
         </Modal.Header>
 
         <Modal.Body id='rules-body'>
-          {showName()}
+          <p>{showName()}</p>
+          <p>Points:</p>
+          <ul>
+            {opponentsData.map(pl => <li key={pl.id}>{pl.name || 'Opponent'}: {gameOver.points[pl.id]}</li>)}
+          </ul>
         </Modal.Body>
 
         <Modal.Footer>
