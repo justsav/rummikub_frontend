@@ -79,12 +79,6 @@ export default function Lobby({
         })
             .then(res => res.json())
             .then(data => {
-                setGameID('')
-                setPlayerID('')
-                setCredentials('')
-                localStorage.removeItem('gameID')
-                localStorage.removeItem('playerID')
-                localStorage.removeItem('credentials')
                 loadGames()
             })
             .catch(err => console.error(err))
@@ -104,7 +98,16 @@ export default function Lobby({
             <FormName {...{playerName, setPlayerName}}/>
             <FormCreate {...{createGame, setNumPlayers}}/>
             <GameList {...{games, playerID, gameID, joinGame, leaveGame}}/>
-            <MyGame {...{playerName, gameID, playerID, credentials, leaveGame}}/>
+            <MyGame {...{
+                playerName, 
+                gameID, 
+                playerID, 
+                credentials, 
+                leaveGame,   
+                setGameID,
+                setPlayerID,
+                setCredentials
+            }}/>
         </Container>
     )
 }

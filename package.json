@@ -49,5 +49,26 @@
   },
   "devDependencies": {
     "del-cli": "^3.0.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "printWidth": 100,
+    "overrides": [
+      {
+        "files": "*.test.js",
+        "options": {
+          "semi": true
+        }
+      },
+      {
+        "files": ["*.html", "legacy/**/*.js"],
+        "options": {
+          "tabWidth": 4
+        }
+      }
+    ]
   }
 }
