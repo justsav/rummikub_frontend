@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {Container, Button, Form, ListGroup} from "react-bootstrap"
-import {useHistory} from 'react-router-dom'
+import {Container} from "react-bootstrap"
+import MyGame from './MyGame'
+import FormName from './FormName'
+import FormCreate from './FormCreate'
+import GameList from './GameList'
 
 export default function Lobby({
                                   playerName,
@@ -12,7 +15,6 @@ export default function Lobby({
                                   credentials,
                                   setCredentials,
                               }) {
-    const history = useHistory()
     const [games, setGames] = useState([])
     const [numPlayers, setNumPlayers] = useState('2')
 
@@ -55,6 +57,10 @@ export default function Lobby({
                 setGameID(gameId)
                 setPlayerID(playerId)
                 setCredentials(data.playerCredentials)
+                localStorage.setItem('playerName', playerName)
+                localStorage.setItem('gameID', gameId)
+                localStorage.setItem('playerID', playerId)
+                localStorage.setItem('credentials', data.playerCredentials)
                 loadGames()
             })
             .catch(err => console.error(err))
@@ -76,6 +82,10 @@ export default function Lobby({
                 setGameID('')
                 setPlayerID('')
                 setCredentials('')
+                localStorage.removeItem('gameID')
+                localStorage.removeItem('playerID')
+                localStorage.removeItem('credentials')
+                loadGames()
             })
             .catch(err => console.error(err))
     }
@@ -89,76 +99,12 @@ export default function Lobby({
         return () => clearInterval(interval)
     }, [])
 
-
-    const renderGame = (g, ind) => {
-        const [gID, players] = [g.gameID, g.players]
-        const freeSlot = players.find(p => !p.name)
-        const pID = freeSlot && `${freeSlot.id}`
-        return <ListGroup.Item key={ind}>
-            {g.players.map(p => p.name ? `[${p.name}] ` : '[free]')}
-            {!playerID && (!gameID || freeSlot === undefined)
-                ?
-                <Button
-                    onClick={() => joinGame(gID, pID)}
-                >Join Game</Button>
-                :
-                null
-            }
-            {gameID === gID &&
-            <Button
-                variant="danger"
-                onClick={() => leaveGame(pID)}
-            >Leave Game</Button>
-            }
-
-
-        </ListGroup.Item>
-    }
-
     return (
         <Container>
-            <Form onSubmit={e => e.preventDefault()}>
-                <Form.Group controlId="playerId">
-                    <Form.Label>Enter your name</Form.Label>
-                    <Form.Control 
-                        type="text" 
-                        value={playerName} 
-                        onChange={e => setPlayerName(e.target.value)}
-                    />
-                </Form.Group>
-
-                <p>Welcome, {playerName}</p>
-
-                <h2>Create a game:</h2>
-                <Form.Group controlId="createRoom">
-                    <Form.Label>Create a rummikub game</Form.Label>
-                    <Form.Row>
-                        <Form.Label>Number of players</Form.Label>
-                        <Form.Control as="select" onChange={e => setNumPlayers(e.target.value)}>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </Form.Control>
-                    </Form.Row>
-
-                </Form.Group>
-                <Button variant="primary" onClick={createGame}>Create Game</Button>
-            </Form>
-            <br/>
-            <h2>List of games:</h2>
-            <ListGroup>
-                {games.map((g, ind) => renderGame(g, ind))}
-            </ListGroup>
-            <br/>
-
-            <Button
-                disabled={!gameID || !playerID || !credentials}
-                variant={'primary'}
-                onClick={() => history.push('/game')}
-            >
-                Start Game
-            </Button>
-
+            <FormName {...{playerName, setPlayerName}}/>
+            <FormCreate {...{createGame, setNumPlayers}}/>
+            <GameList {...{games, playerID, gameID, joinGame, leaveGame}}/>
+            <MyGame {...{playerName, gameID, playerID, credentials, leaveGame}}/>
         </Container>
     )
 }
