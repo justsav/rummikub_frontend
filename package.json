@@ -24,7 +24,7 @@
   "scripts": {
     "start": "REACT_APP_GAME_SERVER=http://localhost:3000/ react-scripts start",
     "startremote": "REACT_APP_GAME_SERVER=https://rummiklub-game-server.herokuapp.com/ react-scripts start",
-    "build": "react-scripts build",
+    "build": "REACT_APP_GAME_SERVER=https://rummiklub-game-server.herokuapp.com/ react-scripts build",
     "heroku-postbuild": "echo Skip build on Heroku",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
