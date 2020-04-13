@@ -146,6 +146,13 @@ const ResetBoard = {
   client: false
 }
 
+const IsVictory = (board, rack) => {
+  if (checkLegal(board) && rack.every(elem => elem === null)) {
+    return true
+  } else 
+    return false
+}
+
 const Rummikub = {
   name: 'rummikub',
 
@@ -172,7 +179,11 @@ const Rummikub = {
       }
     }
   },
-
+  endIf: (G, ctx) => {
+    if (IsVictory(G.cells, G.players[ctx.currentPlayer])) {
+      return { winner: ctx.currentPlayer }
+    }
+  },
   playerView: PlayerView.STRIP_SECRETS,
 
 }
