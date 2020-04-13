@@ -14,4 +14,4 @@ const lobbyConfig = {
 
 }
 
-server.run({ port: 8001 , lobbyConfig})
+server.run({ port: process.env.PORT || 8001 , lobbyConfig})
