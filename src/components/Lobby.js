@@ -4,6 +4,8 @@ import MyGame from './MyGame'
 import FormName from './FormName'
 import FormCreate from './FormCreate'
 import GameList from './GameList'
+import '../lobby.css'
+import jface from '../static/jface.png'
 
 export default function Lobby({
                                   playerName,
@@ -100,12 +102,20 @@ export default function Lobby({
     }, [])
 
     return (
-        <Container>
-            <FormName {...{playerName, setPlayerName}}/>
-            <FormCreate {...{createGame, setNumPlayers}}/>
-            <GameList {...{games, playerID, gameID, joinGame, leaveGame}}/>
-            <MyGame {...{playerName, gameID, playerID, credentials, leaveGame}}/>
-        </Container>
+        <div className='bg-overlay'>
+            <Container className='lobby-contain'>
+                <div className='row'>
+                    <img src={jface} alt='joker face' id='lob-title-img'/>
+                    <div id='lob-title'>
+                        <h3>Welcome to the Lobby, Let's Get You in a Game...</h3>
+                    </div>
+                </div>
+                    <FormName {...{playerName, setPlayerName}}/>
+                    <FormCreate {...{createGame, setNumPlayers}}/>
+                    { gameID && <MyGame {...{playerName, gameID, playerID, credentials, leaveGame}}/> }
+                    <GameList {...{games, playerID, gameID, joinGame, leaveGame}}/>
+            </Container>
+        </div>
     )
 }
 
