@@ -33,7 +33,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
       if (init) {
         setOpponentsData(init)
       } else {
-        fetch(`/games/rummikub/${gameID}`)
+        fetch(`${process.env.REACT_APP_GAME_SERVER}games/rummikub/${gameID}`)
         .then(res => res.json())
         .then(data => {
           setOpponentsData(data.players)

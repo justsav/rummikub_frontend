@@ -23,7 +23,7 @@ const Home = () => {
         <header>
           <div className="overlay">
           </div>
-            <video poster={poster} playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <video poster={poster} playsInline autoPlay muted loop>
               <source src={vid} type="video/mp4"/>
             </video>
 
@@ -36,7 +36,7 @@ const Home = () => {
               <h1>Take Comfort in the Classics</h1>
               <h3>RummiKlub brings you the world's favorite tabletop tile game, enhanced to reconnect you with friends and family for hours of gaming fun.</h3>
               <Link to="/lobby">
-              <button type="button" class="btn btn-primary">PLAY NOW</button>
+              <button type="button" className="btn btn-primary">PLAY NOW</button>
               </Link>
             </div>
             </div>
@@ -95,7 +95,7 @@ const Home = () => {
                 <h1>By Far, Best Presentation</h1>
                 <p>Text about how this is a superior product. Text about how this is a superior product. Text about how this is a superior product. Text about how this is a superior product. Text about how this is a superior product. Text about how this is a superior product. Text about how this is a superior product.</p>
                 <Link to="/lobby">
-                  <button type="button" class="btn btn-primary">PLAY NOW</button>
+                  <button type="button" className="btn btn-primary">PLAY NOW</button>
                 </Link>
               </div>
               </div>
@@ -107,7 +107,7 @@ const Home = () => {
             <div className="container home-rules">
             <img src={joker} alt='' width="60" />
             <h3>Been awhile since you played, or are you new to the game?</h3>
-            <button type="button" class="btn btn-light" onClick={() => setShow(true)}>HOW TO PLAY</button>
+            <button type="button" className="btn btn-light" onClick={() => setShow(true)}>HOW TO PLAY</button>
             {<Rules {...{show, setShow}} />}
             </div>
           </div>
@@ -121,22 +121,22 @@ const Home = () => {
               <div className="col-3">
                 <img src={bz} alt='bek head shot' width="90" />
                 <h5>Bek Zhuma</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/beknazar1/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
+                <a role="button" className="btn btn-dark" href='https://www.linkedin.com/in/beknazar1/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
               <div className="col-3">
                 <img src={km} alt='kev head shot' width="90" />
                 <h5>Kevin Maguire</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/kevin-maguire-ii/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
+                <a role="button" className="btn btn-dark" href='https://www.linkedin.com/in/kevin-maguire-ii/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
               <div className="col-3">
                 <img src={sb} alt='saumya head shot' width="90" />
                 <h5>Saumya Bajracharya</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/ssbajracharya/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
+                <a role="button" className="btn btn-dark" href='https://www.linkedin.com/in/ssbajracharya/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
               <div className="col-3">
                 <img src={js} alt='justin head shot' width="90" />
                 <h5>Justin Savage</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/justsav/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
+                <a role="button" className="btn btn-dark" href='https://www.linkedin.com/in/justsav/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
             </div>
           </div>

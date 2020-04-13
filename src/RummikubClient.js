@@ -6,7 +6,7 @@ import RummikubBoard from './RummikubBoard'
 const RummikubClient = Client({
   game: Rummikub, 
   board: RummikubBoard,
-  multiplayer: SocketIO(),
+  multiplayer: SocketIO({ server: process.env.REACT_APP_GAME_SERVER }),
   // multiplayer: Local(),
   // debug: true
 })
