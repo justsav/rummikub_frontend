@@ -6,10 +6,10 @@ import Lobby from './components/Lobby'
 import Home from './components/Home'
 
 const App = () => {
-    const [playerName, setPlayerName] = useState('Visitor')
-    const [gameID, setGameID] = useState('')
-    const [playerID, setPlayerID] = useState('')
-    const [credentials, setCredentials] = useState('')
+    const [playerName, setPlayerName] = useState(localStorage.getItem('playerName') || 'Visitor')
+    const [gameID, setGameID] = useState(localStorage.getItem('gameID') || '')
+    const [playerID, setPlayerID] = useState(localStorage.getItem('playerID') || '')
+    const [credentials, setCredentials] = useState(localStorage.getItem('credentials') || '')
 
     return (
         <Router>

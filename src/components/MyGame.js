@@ -29,7 +29,7 @@ export default function MyGame({
         variant={"primary"}
         onClick={() => history.push("/game")}
       >
-        Start Game
+        Open Game
       </Button>
       <Button
         variant="danger"
