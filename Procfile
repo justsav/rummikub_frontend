@@ -1,0 +1,1 @@
+game: node -r esm gameServer.js

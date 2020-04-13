@@ -4,10 +4,10 @@ import Rummikub from './src/Rummikub'
 
 const server = Server({
   games: [Rummikub],
-  db: new FlatFile({
-    dir: './gameDb',
-    logging: true
-  })
+  // db: new FlatFile({
+  //   dir: './gameDb',
+  //   logging: true
+  // })
 })
 
 const lobbyConfig = {
