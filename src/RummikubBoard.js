@@ -12,6 +12,7 @@ import EndTurnButton from './components/EndTurnButton'
 import avatar from './static/av.png'
 import Rules from './components/Rules'
 import logo from './static/logo.svg'
+import Gameover from './components/Gameover'
 
 const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
@@ -23,12 +24,12 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   const [opponentsData, setOpponentsData] = useState([])
   const [opponents, setOpponents] = useState([])
   const stopFetching = useRef(false)
+  const [showGameover, setShowGameover] = useState(false)
 
   useEffect(() => {
     const getMetadata = (init) => {
       if (init) {
         setOpponentsData(init)
-        // renderOpponents(init)
       } else {
         fetch(`/games/rummikub/${gameID}`)
         .then(res => res.json())
@@ -70,6 +71,12 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
     renderOpponents()
   }, [opponentsData, ctx.currentPlayer, playerID])
 
+  useEffect(() => {
+    if (ctx.gameover) {
+      setShowGameover(true)
+    }
+  }, [ctx.gameover])
+
   const handleReset = () => {
     moves.ResetBoard()
   }
@@ -84,7 +91,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
             <Row id='top-row'>
               <Col id='logo-area' md={3}>
                 <img src={logo} alt='game logo' width="275" />
-                <p>
+                <div>
                 <div className='admin-btn-container'>
                   <Button className='small-btn' variant="dark" size="sm" onClick={() => setShow(true)}>
                     How to Play
@@ -95,7 +102,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
                     </Button>
                   </LinkContainer>
                   </div>
-                </p>
+                </div>
                 {<Rules {...{show, setShow}} />}
               </Col>
               <Col id='opponent-info' md={6}>
@@ -136,6 +143,14 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
               </Col>
             </Row>
           </Container>
+          {ctx.gameover && <Gameover {...{
+            showGameover, 
+            setShowGameover, 
+            gameOver: ctx.gameover,
+            opponentsData,
+            playerID,
+            gameMetadata
+          }}/>}
         </div>
       </DndProvider>
     )

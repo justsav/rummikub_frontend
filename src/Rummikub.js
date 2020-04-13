@@ -3,6 +3,7 @@ import _ from 'lodash'
 import {BOARD_WIDTH, BOARD_HEIGHT, RACK_WIDTH, RACK_HEIGHT} from './constants'
 import {checkLegal} from './rules/checkLegal'
 import {check30} from './rules/check30'
+import {countPlayersPoints} from './rules/countPoints'
 
 const tiles = [
   'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13',
@@ -146,6 +147,13 @@ const ResetBoard = {
   client: false
 }
 
+const IsVictory = (board, rack) => {
+  if (checkLegal(board) && rack.every(elem => elem === null)) {
+    return true
+  } else 
+    return false
+}
+
 const Rummikub = {
   name: 'rummikub',
 
@@ -172,7 +180,14 @@ const Rummikub = {
       }
     }
   },
-
+  endIf: (G, ctx) => {
+    if (IsVictory(G.cells, G.players[ctx.currentPlayer])) {
+      return { 
+        winner: ctx.currentPlayer,
+        points: countPlayersPoints(G.players)
+      }
+    }
+  },
   playerView: PlayerView.STRIP_SECRETS,
 
 }
