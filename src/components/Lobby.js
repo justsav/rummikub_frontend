@@ -18,13 +18,13 @@ export default function Lobby({
 
 
     const loadGames = () => {
-        fetch('/games/rummikub')
+        fetch(`${process.env.REACT_APP_GAME_SERVER}games/rummikub`)
             .then(res => res.json())
             .then(data => setGames(data.rooms))
     }
 
     const createGame = () => {
-        fetch(`/games/rummikub/create`, {
+        fetch(`${process.env.REACT_APP_GAME_SERVER}games/rummikub/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export default function Lobby({
     }
 
     const joinGame = (gameId, playerId) => {
-        fetch(`/games/rummikub/${gameId}/join`, {
+        fetch(`${process.env.REACT_APP_GAME_SERVER}games/rummikub/${gameId}/join`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ export default function Lobby({
     }
 
     const leaveGame = () => {
-        fetch(`/games/rummikub/${gameID}/leave`, {
+        fetch(`${process.env.REACT_APP_GAME_SERVER}games/rummikub/${gameID}/leave`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

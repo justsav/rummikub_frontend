@@ -29,3 +29,7 @@ yarn-error.log*
 gameDb
 
 package-lock.json
+venv
+*.pyc
+__pycache__
+.netlify
