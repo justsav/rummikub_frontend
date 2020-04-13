@@ -2,8 +2,18 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import { useHistory } from "react-router-dom"
 
-export default function MyGame({ playerName, gameID, playerID, credentials }) {
+export default function MyGame({
+  playerName,
+  gameID,
+  playerID,
+  credentials,
+  leaveGame,
+}) {
   const history = useHistory()
+
+  const handleLeave = () => {
+    leaveGame()
+  }
 
   return (
     <div>
@@ -20,6 +30,13 @@ export default function MyGame({ playerName, gameID, playerID, credentials }) {
         onClick={() => history.push("/game")}
       >
         Start Game
+      </Button>
+      <Button
+        variant="danger"
+        onClick={handleLeave}
+        disabled={!gameID || !playerID || !credentials}
+      >
+        Leave Game
       </Button>
     </div>
   )

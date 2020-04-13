@@ -78,6 +78,7 @@ export default function Lobby({
                 setGameID('')
                 setPlayerID('')
                 setCredentials('')
+                loadGames()
             })
             .catch(err => console.error(err))
     }
@@ -96,7 +97,7 @@ export default function Lobby({
             <FormName {...{playerName, setPlayerName}}/>
             <FormCreate {...{createGame, setNumPlayers}}/>
             <GameList {...{games, playerID, gameID, joinGame, leaveGame}}/>
-            <MyGame {...{playerName, gameID, playerID, credentials}}/>
+            <MyGame {...{playerName, gameID, playerID, credentials, leaveGame}}/>
         </Container>
     )
 }

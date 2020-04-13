@@ -6,7 +6,6 @@ export default function GameList({
   playerID,
   gameID,
   joinGame,
-  leaveGame,
 }) {
   const renderGame = (g, ind) => {
     const [gID, players] = [g.gameID, g.players]
@@ -19,11 +18,6 @@ export default function GameList({
         {!playerID && (!gameID || freeSlot === undefined) ? (
           <Button onClick={() => joinGame(gID, pID)}>Join Game</Button>
         ) : null}
-        {gameID === gID && (
-          <Button variant="danger" onClick={() => leaveGame(pID)}>
-            Leave Game
-          </Button>
-        )}
       </ListGroup.Item>
     )
   }
