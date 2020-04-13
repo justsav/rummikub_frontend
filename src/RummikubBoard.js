@@ -13,6 +13,8 @@ import avatar from './static/av.png'
 import Rules from './components/Rules'
 import logo from './static/logo.svg'
 import Gameover from './components/Gameover'
+import Timer from './components/Timer'
+
 
 const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   const isCurrentPlayer = ctx.currentPlayer === playerID
@@ -25,7 +27,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
   const [opponents, setOpponents] = useState([])
   const stopFetching = useRef(false)
   const [showGameover, setShowGameover] = useState(false)
-
+  
   useEffect(() => {
     const getMetadata = (init) => {
       if (init) {
@@ -120,6 +122,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
             <Row id='bottom-row'>
               <Col id='self-info' md={2}>
                 <p>{isCurrentPlayer && 'YOUR TURN'}</p>
+                <p>{isCurrentPlayer && <Timer {...{playerID, PullTile: moves.PullTile}}/>}</p>
                 <p>PLAYER {parseInt(playerID) + 1}</p>
                 <div className={isCurrentPlayer ? 'avatar me-avatar-active' : 'avatar'}>
                   <img src={avatar} alt="player avatar" />

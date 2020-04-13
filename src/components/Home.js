@@ -121,22 +121,22 @@ const Home = () => {
               <div className="col-3">
                 <img src={bz} alt='bek head shot' width="90" />
                 <h5>Bek Zhuma</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/beknazar1/' target="_blank">MORE INFO</a>
+                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/beknazar1/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
               <div className="col-3">
                 <img src={km} alt='kev head shot' width="90" />
                 <h5>Kevin Maguire</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/kevin-maguire-ii/' target="_blank">MORE INFO</a>
+                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/kevin-maguire-ii/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
               <div className="col-3">
                 <img src={sb} alt='saumya head shot' width="90" />
                 <h5>Saumya Bajracharya</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/ssbajracharya/' target="_blank">MORE INFO</a>
+                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/ssbajracharya/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
               <div className="col-3">
                 <img src={js} alt='justin head shot' width="90" />
                 <h5>Justin Savage</h5>
-                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/justsav/' target="_blank">MORE INFO</a>
+                <a role="button" class="btn btn-dark" href='https://www.linkedin.com/in/justsav/' target="_blank" rel="noopener noreferrer">MORE INFO</a>
               </div>
             </div>
           </div>
