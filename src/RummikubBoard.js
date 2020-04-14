@@ -122,7 +122,7 @@ const RummikubBoard = ({G, ctx, moves, playerID, gameID, gameMetadata}) => {
             <Row id='bottom-row'>
               <Col id='self-info' md={2}>
                 <p>{isCurrentPlayer && 'YOUR TURN'}</p>
-                <p>{isCurrentPlayer && <Timer {...{playerID, PullTile: moves.PullTile}}/>}</p>
+                {isCurrentPlayer && <Timer {...{playerID, PullTile: moves.PullTile}}/>}
                 <p>PLAYER {parseInt(playerID) + 1}</p>
                 <div className={isCurrentPlayer ? 'avatar me-avatar-active' : 'avatar'}>
                   <img src={avatar} alt="player avatar" />
