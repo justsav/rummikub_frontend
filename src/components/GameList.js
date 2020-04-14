@@ -13,14 +13,12 @@ export default function GameList({
     if (freeSlot === undefined) return null
     const pID = freeSlot && `${freeSlot.id}`
     return (
-      <div id='game-list'>
-        <ListGroup.Item key={ind}>
-          {g.players.map((p) => (p.name ? `[${p.name}] ` : "[Available]"))}
-          {!playerID && (!gameID || freeSlot === undefined) ? (
-            <Button onClick={() => joinGame(gID, pID)}>Join</Button>
-          ) : null}
-        </ListGroup.Item>
-      </div>
+      <ListGroup.Item key={ind} id='game-list'>
+        {g.players.map((p) => (p.name ? `[${p.name}] ` : "[Available]"))}
+        {!playerID && (!gameID || freeSlot === undefined) ? (
+          <Button onClick={() => joinGame(gID, pID)}>Join</Button>
+        ) : null}
+      </ListGroup.Item>
     )
   }
 
