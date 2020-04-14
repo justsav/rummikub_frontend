@@ -9,6 +9,7 @@ header {
   min-height: 25rem;
   width: 100%;
   overflow: hidden;
+  max-height: 560px;
 }
 
 header video {
@@ -60,7 +61,7 @@ header .overlay {
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: 12px;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 #masthead-elements h3 {
@@ -93,7 +94,7 @@ header .overlay {
   z-index: 3;
   margin-top: -40px;
   border-radius: 10px;
-  height: 230px;
+  height: 220px;
   max-width: 310px;
   padding-right: 0px;
   padding-left: 15px;
@@ -201,6 +202,10 @@ header .overlay {
   box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.6);
 }
 
+.home-rules h3 {
+  margin-left: 20px;
+}
+
 .home-rules button {
   font-weight: 600;
   font-size: 17px;
@@ -247,4 +252,29 @@ header .overlay {
 #copyright {
   text-align: center;
   padding-bottom: 20px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 992px) {
+  .stepbox { display: none; }
+  #gameview-container { display: none; }
+  .home-rules h3 { font-size: 1rem; }
+  .play-button button { display: none; }
+}
+
+@media screen and (max-width: 768px) {
+  #belt { display: none; }
+  #hall-fame { display: none; }
+}
+
+@media screen and (max-width: 992px) {
+  #masthead-elements h2 { display: block; }
+  #masthead-elements h3 { display: none; }
+  #masthead-elements h1 { display: none; }
+}
+
+#device-warn {
+  margin-top: 50px;
+  display: none;
+  color: white;
 }

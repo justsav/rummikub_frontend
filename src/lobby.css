@@ -82,7 +82,6 @@ body {
   margin-top: 10px;
   display: flex;
   justify-content: center;
-  /* width: 200px; */
 }
 
 #name-label {
@@ -157,4 +156,8 @@ body {
 
 .list-group-item button {
   margin-left: 20px;
+}
+
+#current-game-info {
+  margin-left: 100px;
 }
