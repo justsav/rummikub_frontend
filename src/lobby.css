@@ -1,0 +1,160 @@
+body {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/b/b1/Rummikub_Tiles.jpg");
+  background-color: #4d4d4c;
+  background-size: cover;
+  background-position: center;
+  overflow-y: auto;
+  background-attachment: fixed;
+}
+
+.bg-overlay {
+  padding-top: 50px;
+  background-color:rgba(0, 0, 0, .4);
+  background-size: cover;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.lobby-contain {
+  max-width: 600px;
+  background-color:rgba(242, 242, 242, .8);
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+}
+
+.lobby-contain-joker {
+  max-width: 600px;
+}
+
+#lob-title-img {
+  margin-left: -100px;
+  margin-top: -40px;
+  width: 150px;
+  animation: rocking 5000ms infinite;
+  -webkit-filter: drop-shadow(2px 2px 5px #222);
+  filter: drop-shadow(2px 2px 5px #222);
+}
+
+#lob-title {
+  width: 480px;
+  text-align: center;
+}
+
+#lob-title h3 {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-left: 10px;
+  letter-spacing: 1.7px;
+  font-weight: 800;
+  position: relative;
+	background: #ffffff;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#lob-title h3:after {
+  content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #ffffff;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+  margin-left: -20px;
+}
+
+@keyframes rocking {
+  0% { transform: rotate(-15deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(-15deg); }
+}
+
+#form-name {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  /* width: 200px; */
+}
+
+#name-label {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+#name-input {
+  width: 200px;
+  margin-left: 30px;
+}
+
+#lobby-subtitle {
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+#create-room {
+  display: flex;
+  justify-content: center;
+}
+
+#player-label {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+#player-input {
+  margin-left: 20px;
+  width: 50px;
+  text-align: center;
+}
+
+#create-room button {
+  margin-left: 20px;
+  height: 40px;
+}
+
+#current-game-title {
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+#current-game-buttons {
+  text-align: center;
+}
+
+#leave-game-btn {
+  margin-left: 20px;
+}
+
+#game-list {
+  text-align: center;
+}
+
+#game-list-items{
+  display: flex;
+  justify-content: center;
+}
+
+.list-group-item button {
+  margin-left: 20px;
+}
