@@ -27,7 +27,7 @@ export default function MyGame({
   return (
     <div>
       <h2 id='lobby-subtitle'>- CURRENT GAME -</h2>
-      <ul>
+      <ul id='current-game-info'>
         <li>Player Name: {playerName || "none"}</li>
         <li>Game ID: {gameID || "none"}</li>
         <li>Player ID: {playerID || "none"}</li>

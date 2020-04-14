@@ -26,11 +26,11 @@ export default function Rules({
           <li>Play a <strong>“Group”</strong> of tiles:  This is 3 or more tiles of the same number, which must be different colors.</li>
           <li>Play a <strong>“Run”</strong> of tiles:  This is a series of 3 or more consecutive number tiles, which must be the same color.</li>
           </ul>
-          <li><strong>Important</strong>: A player’s first play on the game board must be a set that totals 30 or more (sum of all tiles played). After a player has made the first move with a value over 30, any tiles can be played to the middle on that player's subsequent turns.</li>
+          <li><strong>Important</strong>: A player’s first play on the game board must be a set <strong>from their rack</strong> that totals 30 or more (sum of all tiles played). After a player has made the first move with a value over 30, any tiles can be played to the middle on that player's subsequent turns.</li>
           <li>When players are unable to play a set on the board, <strong>they draw a tile and their turn ends.</strong></li>
           <li>A player can play as many sets as he/she wants per each turn.</li>
           <li>During their turn, a player can add tiles to existing sets, and existing sets can be broken up or moved around to form new sets, as long as at least one tile came from his/her rack, and every tile ends up in an acceptable set by the end of the turn.</li>
-          <li>The <strong>joker tile</strong> can be played as any number and color to help complete a set. Any time a player has a tile that a joker is representing, the tile can replace the joker. When the joker is moved, it must be used in a new set on the board in the same turn, and can take on a new value.</li>
+          <li>The <strong>joker tile</strong> can be played as any number and color to help complete a set. Any time a player has a tile that a joker is representing, the tile can replace the joker.</li>
           <li>Again, the player to play <strong>all his/her tiles first wins</strong> the game.</li>
         </ul>
         </Modal.Body>
